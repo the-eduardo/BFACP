@@ -514,7 +514,7 @@
         };
 
         this.val = function (v, triggerRelease) {
-            if (null != v) {
+            if (v != null) {
 
                 // reverse format
                 v = this.o.parse(v);

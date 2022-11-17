@@ -33,7 +33,7 @@ Licensed under the BSD-2-Clause License.
 
     EventEmitter.prototype.fire = function() {
       var args, handler, name, _i, _len, _ref, _results;
-      name = arguments[0], args = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
+      name = arguments[0], args = arguments.length >= 2 ? __slice.call(arguments, 1) : [];
       if ((this.handlers != null) && (this.handlers[name] != null)) {
         _ref = this.handlers[name];
         _results = [];
@@ -433,7 +433,7 @@ Licensed under the BSD-2-Clause License.
           bottomOffsets = (function() {
             var _i, _ref2, _results;
             _results = [];
-            for (i = _i = 0, _ref2 = this.data.length; 0 <= _ref2 ? _i < _ref2 : _i > _ref2; i = 0 <= _ref2 ? ++_i : --_i) {
+            for (i = _i = 0, _ref2 = this.data.length; _ref2 >= 0 ? _i < _ref2 : _i > _ref2; i = _ref2 >= 0 ? ++_i : --_i) {
               _results.push(this.measureText(this.data[i].text, -this.options.xLabelAngle).height);
             }
             return _results;
@@ -857,7 +857,7 @@ Licensed under the BSD-2-Clause License.
       return this.paths = (function() {
         var _i, _ref, _ref1, _results;
         _results = [];
-        for (i = _i = 0, _ref = this.options.ykeys.length; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
+        for (i = _i = 0, _ref = this.options.ykeys.length; _ref >= 0 ? _i < _ref : _i > _ref; i = _ref >= 0 ? ++_i : --_i) {
           smooth = typeof this.options.smooth === "boolean" ? this.options.smooth : (_ref1 = this.options.ykeys[i], __indexOf.call(this.options.smooth, _ref1) >= 0);
           coords = (function() {
             var _j, _len, _ref2, _results1;
@@ -1057,14 +1057,14 @@ Licensed under the BSD-2-Clause License.
     Line.prototype.hilight = function(index) {
       var i, _i, _j, _ref, _ref1;
       if (this.prevHilight !== null && this.prevHilight !== index) {
-        for (i = _i = 0, _ref = this.seriesPoints.length - 1; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
+        for (i = _i = 0, _ref = this.seriesPoints.length - 1; _ref >= 0 ? _i <= _ref : _i >= _ref; i = _ref >= 0 ? ++_i : --_i) {
           if (this.seriesPoints[i][this.prevHilight]) {
             this.seriesPoints[i][this.prevHilight].animate(this.pointShrinkSeries(i));
           }
         }
       }
       if (index !== null && this.prevHilight !== index) {
-        for (i = _j = 0, _ref1 = this.seriesPoints.length - 1; 0 <= _ref1 ? _j <= _ref1 : _j >= _ref1; i = 0 <= _ref1 ? ++_j : --_j) {
+        for (i = _j = 0, _ref1 = this.seriesPoints.length - 1; _ref1 >= 0 ? _j <= _ref1 : _j >= _ref1; i = _ref1 >= 0 ? ++_j : --_j) {
           if (this.seriesPoints[i][index]) {
             this.seriesPoints[i][index].animate(this.pointGrowSeries(i));
           }
@@ -1333,7 +1333,7 @@ Licensed under the BSD-2-Clause License.
       if (this.options.behaveLikeLine) {
         range = (function() {
           _results = [];
-          for (var _i = 0, _ref = this.options.ykeys.length - 1; 0 <= _ref ? _i <= _ref : _i >= _ref; 0 <= _ref ? _i++ : _i--){ _results.push(_i); }
+          for (var _i = 0, _ref = this.options.ykeys.length - 1; _ref >= 0 ? _i <= _ref : _i >= _ref; _ref >= 0 ? _i++ : _i--){ _results.push(_i); }
           return _results;
         }).apply(this);
       } else {
@@ -1459,7 +1459,7 @@ Licensed under the BSD-2-Clause License.
       prevLabelMargin = null;
       prevAngleMargin = null;
       _results = [];
-      for (i = _i = 0, _ref = this.data.length; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
+      for (i = _i = 0, _ref = this.data.length; _ref >= 0 ? _i < _ref : _i > _ref; i = _ref >= 0 ? ++_i : --_i) {
         row = this.data[this.data.length - 1 - i];
         label = this.drawXAxisLabel(row._x, ypos, row.label);
         textBox = label.getBBox();

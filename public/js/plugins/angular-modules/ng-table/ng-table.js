@@ -791,7 +791,7 @@ app.directive('ngTable', ['$q', '$parse',
                 }
                 angular.forEach(row.find('td'), function(item) {
                     var el = angular.element(item);
-                    if (el.attr('ignore-cell') && 'true' === el.attr('ignore-cell')) {
+                    if (el.attr('ignore-cell') && el.attr('ignore-cell') === 'true') {
                         return;
                     }
 

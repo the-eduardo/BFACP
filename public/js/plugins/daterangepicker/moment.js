@@ -1926,8 +1926,8 @@
 
     function moment_format__toISOString () {
         var m = this.clone().utc();
-        if (0 < m.year() && m.year() <= 9999) {
-            if ('function' === typeof Date.prototype.toISOString) {
+        if (m.year() > 0 && m.year() <= 9999) {
+            if (typeof Date.prototype.toISOString === 'function') {
                 // native implementation is ~50x faster, use it when we can
                 return this.toDate().toISOString();
             } else {
