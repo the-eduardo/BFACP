@@ -213,7 +213,7 @@
 		clone = helpers.clone = function(obj){
 			var objClone = {};
 			each(obj,function(value,key){
-				if (obj.hasOwnProperty(key)){
+				if (Object.prototype.hasOwnProperty.call(obj, key)){
 					objClone[key] = value;
 				}
 			});
@@ -222,7 +222,7 @@
 		extend = helpers.extend = function(base){
 			each(Array.prototype.slice.call(arguments,1), function(extensionObject) {
 				each(extensionObject,function(value,key){
-					if (extensionObject.hasOwnProperty(key)){
+					if (Object.prototype.hasOwnProperty.call(extensionObject, key)){
 						base[key] = value;
 					}
 				});
@@ -284,7 +284,7 @@
 		inherits = helpers.inherits = function(extensions){
 			//Basic javascript inheritance based on the model created in Backbone.js
 			var parent = this;
-			var ChartElement = (extensions && extensions.hasOwnProperty("constructor")) ? extensions.constructor : function(){ return parent.apply(this, arguments); };
+			var ChartElement = (extensions && Object.prototype.hasOwnProperty.call(extensions, 'constructor')) ? extensions.constructor : function(){ return parent.apply(this, arguments); };
 
 			var Surrogate = function(){ this.constructor = ChartElement;};
 			Surrogate.prototype = parent.prototype;

@@ -145,7 +145,7 @@ function merge() {
 			}
 
 			for (key in original) {
-				if (original.hasOwnProperty(key)) {
+				if (Object.prototype.hasOwnProperty.call(original, key)) {
 					value = original[key];
 
 					// Copy the contents of objects, but not arrays or DOM nodes
@@ -10280,7 +10280,7 @@ if (win.PointerEvent || win.MSPointerEvent) {
 			var key, fake = [];
 			fake.item = function (i) { return this[i]; };
 			for (key in touches) {
-				if (touches.hasOwnProperty(key)) {
+				if (Object.prototype.hasOwnProperty.call(touches, key)) {
 					fake.push({
 						pageX: touches[key].pageX,
 						pageY: touches[key].pageY,

@@ -114,7 +114,7 @@
 
 			// Add all column mappings
 			for (name in mapping) {
-				if (mapping.hasOwnProperty(name) && name !== 'x') {
+				if (Object.prototype.hasOwnProperty.call(mapping, name) && name !== 'x') {
 					builder.addColumnReader(mapping[name], name);
 				}
 			}
@@ -783,7 +783,7 @@
 					var i, series;
 					
 					// Merge series configs
-					if (userOptions.hasOwnProperty('series')) {
+					if (Object.prototype.hasOwnProperty.call(userOptions, 'series')) {
 						if (typeof userOptions.series === 'object') {
 							i = Math.max(userOptions.series.length, dataOptions.series.length);
 							while (i--) {

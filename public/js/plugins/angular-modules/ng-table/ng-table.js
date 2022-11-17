@@ -388,7 +388,7 @@ app.factory('NgTableParams', ['$q', '$log', 'ngTableDefaults', function($q, $log
             asString = asString || false;
             var pairs = (asString ? [] : {});
             for (var key in params) {
-                if (params.hasOwnProperty(key)) {
+                if (Object.prototype.hasOwnProperty.call(params, key)) {
                     var item = params[key],
                         name = encodeURIComponent(key);
                     if (typeof item === "object") {
@@ -528,7 +528,7 @@ function($scope, NgTableParams, $timeout, $parse, $compile, $attrs, $element, ng
     // until such times as the directive uses an isolated scope, we need to ensure that the check for
     // the params field only consults the "own properties" of the $scope. This is to avoid seeing the params
     // field on a $scope higher up in the prototype chain
-    if (!$scope.hasOwnProperty("params")) {
+    if (!Object.prototype.hasOwnProperty.call($scope, 'params')) {
         $scope.params = new NgTableParams();
         $scope.params.isNullInstance = true;
     }

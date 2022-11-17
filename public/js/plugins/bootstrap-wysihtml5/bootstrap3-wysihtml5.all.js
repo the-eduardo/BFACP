@@ -210,7 +210,7 @@ var wysihtml5 = {
         api.util.extend = function(obj, props, deep) {
             var o, p;
             for (var i in props) {
-                if (props.hasOwnProperty(i)) {
+                if (Object.prototype.hasOwnProperty.call(props, i)) {
                     o = obj[i];
                     p = props[i];
                     if (deep && o !== null && typeof o == "object" && p !== null && typeof p == "object") {
@@ -220,7 +220,7 @@ var wysihtml5 = {
                 }
             }
             // Special case for toString, which does not show up in for...in loops in IE <= 8
-            if (props.hasOwnProperty("toString")) {
+            if (Object.prototype.hasOwnProperty.call(props, 'toString')) {
                 obj.toString = props.toString;
             }
             return obj;
@@ -4784,7 +4784,7 @@ wysihtml5.browser = (function() {
       }
 
       for (i in obj) {
-        if(obj.hasOwnProperty(i)) {
+        if(Object.prototype.hasOwnProperty.call(obj, i)) {
           if (deep) {
             newObj[i] = wysihtml5.lang.object(obj[i]).clone(deep);
           } else {
@@ -6042,7 +6042,7 @@ wysihtml5.dom.parse = function(elementOrHtml_current, config_current) {
     var sel, method, els;
 
     for (sel in selectorRules) {
-      if (selectorRules.hasOwnProperty(sel)) {
+      if (Object.prototype.hasOwnProperty.call(selectorRules, sel)) {
         if (wysihtml5.lang.object(selectorRules[sel]).isFunction()) {
           method = selectorRules[sel];
         } else if (typeof(selectorRules[sel]) === "string" && elementHandlingMethods[selectorRules[sel]]) {
@@ -6148,7 +6148,7 @@ wysihtml5.dom.parse = function(elementOrHtml_current, config_current) {
     }
 
     for (type in types) {
-      if (types.hasOwnProperty(type) && rules.type_definitions && rules.type_definitions[type]) {
+      if (Object.prototype.hasOwnProperty.call(types, type) && rules.type_definitions && rules.type_definitions[type]) {
         definition = rules.type_definitions[type];
         if (_testType(oldNode, definition)) {
           return true;
@@ -6177,7 +6177,7 @@ wysihtml5.dom.parse = function(elementOrHtml_current, config_current) {
     // test for methods
     if (definition.methods) {
       for (var m in definition.methods) {
-        if (definition.methods.hasOwnProperty(m) && typeCeckMethods[m]) {
+        if (Object.prototype.hasOwnProperty.call(definition.methods, m) && typeCeckMethods[m]) {
 
           if (typeCeckMethods[m](oldNode)) {
             return true;
@@ -6202,7 +6202,7 @@ wysihtml5.dom.parse = function(elementOrHtml_current, config_current) {
 
       nodeStyles = nodeStyles.split(';');
       for (s in definition.styles) {
-        if (definition.styles.hasOwnProperty(s)) {
+        if (Object.prototype.hasOwnProperty.call(definition.styles, s)) {
           for (var sp = nodeStyles.length; sp--;) {
             styleProp = nodeStyles[sp].split(':');
 
@@ -6219,7 +6219,7 @@ wysihtml5.dom.parse = function(elementOrHtml_current, config_current) {
     // test for attributes in general against regex match
     if (definition.attrs) {
         for (a in definition.attrs) {
-            if (definition.attrs.hasOwnProperty(a)) {
+            if (Object.prototype.hasOwnProperty.call(definition.attrs, a)) {
                 attr = wysihtml5.dom.getAttribute(oldNode, a);
                 if (typeof(attr) === "string") {
                     if (attr.search(definition.attrs[a]) > -1) {
@@ -6236,7 +6236,7 @@ wysihtml5.dom.parse = function(elementOrHtml_current, config_current) {
     var s, v;
     if(rule && rule.keep_styles) {
       for (s in rule.keep_styles) {
-        if (rule.keep_styles.hasOwnProperty(s)) {
+        if (Object.prototype.hasOwnProperty.call(rule.keep_styles, s)) {
           v = (s === "float") ? oldNode.style.styleFloat || oldNode.style.cssFloat : oldNode.style[s];
           // value can be regex and if so should match or style skipped
           if (rule.keep_styles[s] instanceof RegExp && !(rule.keep_styles[s].test(v))) {
@@ -6256,7 +6256,7 @@ wysihtml5.dom.parse = function(elementOrHtml_current, config_current) {
   function _getAttributesBeginningWith(beginning, attributes) {
     var returnAttributes = [];
     for (var attr in attributes) {
-      if (attributes.hasOwnProperty(attr) && attr.indexOf(beginning) === 0) {
+      if (Object.prototype.hasOwnProperty.call(attributes, attr) && attr.indexOf(beginning) === 0) {
         returnAttributes.push(attr);
       }
     }
@@ -7305,7 +7305,7 @@ wysihtml5.dom.getAttributes = function(node) {
       attr;
 
   for (attr in node.attributes) {
-    if ((node.attributes.hasOwnProperty && node.attributes.hasOwnProperty(attr)) || (!node.attributes.hasOwnProperty && Object.prototype.hasOwnProperty.call(node.attributes, attr)))  {
+    if ((node.attributes.hasOwnProperty && Object.prototype.hasOwnProperty.call(node.attributes, attr)) || (!node.attributes.hasOwnProperty && Object.prototype.hasOwnProperty.call(node.attributes, attr)))  {
       if (node.attributes[attr].specified) {
         if (nodeName == "IMG" && node.attributes[attr].name.toLowerCase() == "src" && wysihtml5.dom.isLoadedImage(node) === true) {
           attributes['src'] = node.src;
@@ -7561,7 +7561,7 @@ wysihtml5.dom.isLoadedImage = function (node) {
 
                 if (attrs) {
                     for (var attr in attrs) {
-                        if (attrs.hasOwnProperty(attr)) {
+                        if (Object.prototype.hasOwnProperty.call(attrs, attr)) {
                             cell.setAttribute(attr, attrs[attr]);
                         }
                     }
@@ -8362,10 +8362,10 @@ wysihtml5.quirks.cleanPastedHTML = (function() {
 
     for (tag in newRules.tags) {
 
-      if (newRules.tags.hasOwnProperty(tag)) {
+      if (Object.prototype.hasOwnProperty.call(newRules.tags, tag)) {
         if (newRules.tags[tag].keep_styles) {
           for (style in newRules.tags[tag].keep_styles) {
-            if (newRules.tags[tag].keep_styles.hasOwnProperty(style)) {
+            if (Object.prototype.hasOwnProperty.call(newRules.tags[tag].keep_styles, style)) {
               if (exceptStyles[style]) {
                 newRules.tags[tag].keep_styles[style] = styleToRegex(exceptStyles[style]);
               }
@@ -10360,7 +10360,7 @@ wysihtml5.Commands = Base.extend(
 
       // Set new attributes
       for (var j in attributes) {
-        if (attributes.hasOwnProperty(j)) {
+        if (Object.prototype.hasOwnProperty.call(attributes, j)) {
           anchors[a].setAttribute(j, attributes[j]);
         }
       }
@@ -14164,7 +14164,7 @@ THE SOFTWARE.
 
 @license
 */
-var Handlebars=function(){var a=function(){"use strict";function a(a){this.string=a}var b;return a.prototype.toString=function(){return""+this.string},b=a}(),b=function(a){"use strict";function b(a){return h[a]||"&amp;"}function c(a,b){for(var c in b)Object.prototype.hasOwnProperty.call(b,c)&&(a[c]=b[c])}function d(a){return a instanceof g?a.toString():a||a===0?(a=""+a,j.test(a)?a.replace(i,b):a):""}function e(a){return a||a===0?m(a)&&a.length===0?!0:!1:!0}var f={},g=a,h={"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#x27;","`":"&#x60;"},i=/[&<>"'`]/g,j=/[&<>"'`]/;f.extend=c;var k=Object.prototype.toString;f.toString=k;var l=function(a){return typeof a=="function"};l(/x/)&&(l=function(a){return typeof a=="function"&&k.call(a)==="[object Function]"});var l;f.isFunction=l;var m=Array.isArray||function(a){return a&&typeof a=="object"?k.call(a)==="[object Array]":!1};return f.isArray=m,f.escapeExpression=d,f.isEmpty=e,f}(a),c=function(){"use strict";function a(a,b){var d;b&&b.firstLine&&(d=b.firstLine,a+=" - "+d+":"+b.firstColumn);for(var e=Error.prototype.constructor.call(this,a),f=0;f<c.length;f++)this[c[f]]=e[c[f]];d&&(this.lineNumber=d,this.column=b.firstColumn)}var b,c=["description","fileName","lineNumber","message","name","number","stack"];return a.prototype=new Error,b=a}(),d=function(a,b){"use strict";function c(a,b){this.helpers=a||{},this.partials=b||{},d(this)}function d(a){a.registerHelper("helperMissing",function(a){if(arguments.length===2)return void 0;throw new h("Missing helper: '"+a+"'")}),a.registerHelper("blockHelperMissing",function(b,c){var d=c.inverse||function(){},e=c.fn;return m(b)&&(b=b.call(this)),b===!0?e(this):b===!1||b==null?d(this):l(b)?b.length>0?a.helpers.each(b,c):d(this):e(b)}),a.registerHelper("each",function(a,b){var c,d=b.fn,e=b.inverse,f=0,g="";if(m(a)&&(a=a.call(this)),b.data&&(c=q(b.data)),a&&typeof a=="object")if(l(a))for(var h=a.length;h>f;f++)c&&(c.index=f,c.first=f===0,c.last=f===a.length-1),g+=d(a[f],{data:c});else for(var i in a)a.hasOwnProperty(i)&&(c&&(c.key=i,c.index=f,c.first=f===0),g+=d(a[i],{data:c}),f++);return f===0&&(g=e(this)),g}),a.registerHelper("if",function(a,b){return m(a)&&(a=a.call(this)),!b.hash.includeZero&&!a||g.isEmpty(a)?b.inverse(this):b.fn(this)}),a.registerHelper("unless",function(b,c){return a.helpers["if"].call(this,b,{fn:c.inverse,inverse:c.fn,hash:c.hash})}),a.registerHelper("with",function(a,b){return m(a)&&(a=a.call(this)),g.isEmpty(a)?void 0:b.fn(a)}),a.registerHelper("log",function(b,c){var d=c.data&&c.data.level!=null?parseInt(c.data.level,10):1;a.log(d,b)})}function e(a,b){p.log(a,b)}var f={},g=a,h=b,i="1.3.0";f.VERSION=i;var j=4;f.COMPILER_REVISION=j;var k={1:"<= 1.0.rc.2",2:"== 1.0.0-rc.3",3:"== 1.0.0-rc.4",4:">= 1.0.0"};f.REVISION_CHANGES=k;var l=g.isArray,m=g.isFunction,n=g.toString,o="[object Object]";f.HandlebarsEnvironment=c,c.prototype={constructor:c,logger:p,log:e,registerHelper:function(a,b,c){if(n.call(a)===o){if(c||b)throw new h("Arg not supported with multiple helpers");g.extend(this.helpers,a)}else c&&(b.not=c),this.helpers[a]=b},registerPartial:function(a,b){n.call(a)===o?g.extend(this.partials,a):this.partials[a]=b}};var p={methodMap:{0:"debug",1:"info",2:"warn",3:"error"},DEBUG:0,INFO:1,WARN:2,ERROR:3,level:3,log:function(a,b){if(p.level<=a){var c=p.methodMap[a];typeof console!="undefined"&&console[c]&&console[c].call(console,b)}}};f.logger=p,f.log=e;var q=function(a){var b={};return g.extend(b,a),b};return f.createFrame=q,f}(b,c),e=function(a,b,c){"use strict";function d(a){var b=a&&a[0]||1,c=m;if(b!==c){if(c>b){var d=n[c],e=n[b];throw new l("Template was precompiled with an older version of Handlebars than the current runtime. Please update your precompiler to a newer version ("+d+") or downgrade your runtime to an older version ("+e+").")}throw new l("Template was precompiled with a newer version of Handlebars than the current runtime. Please update your runtime to a newer version ("+a[1]+").")}}function e(a,b){if(!b)throw new l("No environment passed to template");var c=function(a,c,d,e,f,g){var h=b.VM.invokePartial.apply(this,arguments);if(h!=null)return h;if(b.compile){var i={helpers:e,partials:f,data:g};return f[c]=b.compile(a,{data:void 0!==g},b),f[c](d,i)}throw new l("The partial "+c+" could not be compiled when running in runtime-only mode")},d={escapeExpression:k.escapeExpression,invokePartial:c,programs:[],program:function(a,b,c){var d=this.programs[a];return c?d=g(a,b,c):d||(d=this.programs[a]=g(a,b)),d},merge:function(a,b){var c=a||b;return a&&b&&a!==b&&(c={},k.extend(c,b),k.extend(c,a)),c},programWithDepth:b.VM.programWithDepth,noop:b.VM.noop,compilerInfo:null};return function(c,e){e=e||{};var f,g,h=e.partial?e:b;e.partial||(f=e.helpers,g=e.partials);var i=a.call(d,h,c,f,g,e.data);return e.partial||b.VM.checkRevision(d.compilerInfo),i}}function f(a,b,c){var d=Array.prototype.slice.call(arguments,3),e=function(a,e){return e=e||{},b.apply(this,[a,e.data||c].concat(d))};return e.program=a,e.depth=d.length,e}function g(a,b,c){var d=function(a,d){return d=d||{},b(a,d.data||c)};return d.program=a,d.depth=0,d}function h(a,b,c,d,e,f){var g={partial:!0,helpers:d,partials:e,data:f};if(void 0===a)throw new l("The partial "+b+" could not be found");return a instanceof Function?a(c,g):void 0}function i(){return""}var j={},k=a,l=b,m=c.COMPILER_REVISION,n=c.REVISION_CHANGES;return j.checkRevision=d,j.template=e,j.programWithDepth=f,j.program=g,j.invokePartial=h,j.noop=i,j}(b,c,d),f=function(a,b,c,d,e){"use strict";var f,g=a,h=b,i=c,j=d,k=e,l=function(){var a=new g.HandlebarsEnvironment;return j.extend(a,g),a.SafeString=h,a.Exception=i,a.Utils=j,a.VM=k,a.template=function(b){return k.template(b,a)},a},m=l();return m.create=l,f=m}(d,a,c,b,e);return f}();this["wysihtml5"] = this["wysihtml5"] || {};
+var Handlebars=function(){var a=function(){"use strict";function a(a){this.string=a}var b;return a.prototype.toString=function(){return""+this.string},b=a}(),b=function(a){"use strict";function b(a){return h[a]||"&amp;"}function c(a,b){for(var c in b)Object.prototype.hasOwnProperty.call(b,c)&&(a[c]=b[c])}function d(a){return a instanceof g?a.toString():a||a===0?(a=""+a,j.test(a)?a.replace(i,b):a):""}function e(a){return a||a===0?m(a)&&a.length===0?!0:!1:!0}var f={},g=a,h={"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#x27;","`":"&#x60;"},i=/[&<>"'`]/g,j=/[&<>"'`]/;f.extend=c;var k=Object.prototype.toString;f.toString=k;var l=function(a){return typeof a=="function"};l(/x/)&&(l=function(a){return typeof a=="function"&&k.call(a)==="[object Function]"});var l;f.isFunction=l;var m=Array.isArray||function(a){return a&&typeof a=="object"?k.call(a)==="[object Array]":!1};return f.isArray=m,f.escapeExpression=d,f.isEmpty=e,f}(a),c=function(){"use strict";function a(a,b){var d;b&&b.firstLine&&(d=b.firstLine,a+=" - "+d+":"+b.firstColumn);for(var e=Error.prototype.constructor.call(this,a),f=0;f<c.length;f++)this[c[f]]=e[c[f]];d&&(this.lineNumber=d,this.column=b.firstColumn)}var b,c=["description","fileName","lineNumber","message","name","number","stack"];return a.prototype=new Error,b=a}(),d=function(a,b){"use strict";function c(a,b){this.helpers=a||{},this.partials=b||{},d(this)}function d(a){a.registerHelper("helperMissing",function(a){if(arguments.length===2)return void 0;throw new h("Missing helper: '"+a+"'")}),a.registerHelper("blockHelperMissing",function(b,c){var d=c.inverse||function(){},e=c.fn;return m(b)&&(b=b.call(this)),b===!0?e(this):b===!1||b==null?d(this):l(b)?b.length>0?a.helpers.each(b,c):d(this):e(b)}),a.registerHelper("each",function(a,b){var c,d=b.fn,e=b.inverse,f=0,g="";if(m(a)&&(a=a.call(this)),b.data&&(c=q(b.data)),a&&typeof a=="object")if(l(a))for(var h=a.length;h>f;f++)c&&(c.index=f,c.first=f===0,c.last=f===a.length-1),g+=d(a[f],{data:c});else for(var i in a)Object.prototype.hasOwnProperty.call(a, i)&&(c&&(c.key=i,c.index=f,c.first=f===0),g+=d(a[i],{data:c}),f++);return f===0&&(g=e(this)),g}),a.registerHelper("if",function(a,b){return m(a)&&(a=a.call(this)),!b.hash.includeZero&&!a||g.isEmpty(a)?b.inverse(this):b.fn(this)}),a.registerHelper("unless",function(b,c){return a.helpers["if"].call(this,b,{fn:c.inverse,inverse:c.fn,hash:c.hash})}),a.registerHelper("with",function(a,b){return m(a)&&(a=a.call(this)),g.isEmpty(a)?void 0:b.fn(a)}),a.registerHelper("log",function(b,c){var d=c.data&&c.data.level!=null?parseInt(c.data.level,10):1;a.log(d,b)})}function e(a,b){p.log(a,b)}var f={},g=a,h=b,i="1.3.0";f.VERSION=i;var j=4;f.COMPILER_REVISION=j;var k={1:"<= 1.0.rc.2",2:"== 1.0.0-rc.3",3:"== 1.0.0-rc.4",4:">= 1.0.0"};f.REVISION_CHANGES=k;var l=g.isArray,m=g.isFunction,n=g.toString,o="[object Object]";f.HandlebarsEnvironment=c,c.prototype={constructor:c,logger:p,log:e,registerHelper:function(a,b,c){if(n.call(a)===o){if(c||b)throw new h("Arg not supported with multiple helpers");g.extend(this.helpers,a)}else c&&(b.not=c),this.helpers[a]=b},registerPartial:function(a,b){n.call(a)===o?g.extend(this.partials,a):this.partials[a]=b}};var p={methodMap:{0:"debug",1:"info",2:"warn",3:"error"},DEBUG:0,INFO:1,WARN:2,ERROR:3,level:3,log:function(a,b){if(p.level<=a){var c=p.methodMap[a];typeof console!="undefined"&&console[c]&&console[c].call(console,b)}}};f.logger=p,f.log=e;var q=function(a){var b={};return g.extend(b,a),b};return f.createFrame=q,f}(b,c),e=function(a,b,c){"use strict";function d(a){var b=a&&a[0]||1,c=m;if(b!==c){if(c>b){var d=n[c],e=n[b];throw new l("Template was precompiled with an older version of Handlebars than the current runtime. Please update your precompiler to a newer version ("+d+") or downgrade your runtime to an older version ("+e+").")}throw new l("Template was precompiled with a newer version of Handlebars than the current runtime. Please update your runtime to a newer version ("+a[1]+").")}}function e(a,b){if(!b)throw new l("No environment passed to template");var c=function(a,c,d,e,f,g){var h=b.VM.invokePartial.apply(this,arguments);if(h!=null)return h;if(b.compile){var i={helpers:e,partials:f,data:g};return f[c]=b.compile(a,{data:void 0!==g},b),f[c](d,i)}throw new l("The partial "+c+" could not be compiled when running in runtime-only mode")},d={escapeExpression:k.escapeExpression,invokePartial:c,programs:[],program:function(a,b,c){var d=this.programs[a];return c?d=g(a,b,c):d||(d=this.programs[a]=g(a,b)),d},merge:function(a,b){var c=a||b;return a&&b&&a!==b&&(c={},k.extend(c,b),k.extend(c,a)),c},programWithDepth:b.VM.programWithDepth,noop:b.VM.noop,compilerInfo:null};return function(c,e){e=e||{};var f,g,h=e.partial?e:b;e.partial||(f=e.helpers,g=e.partials);var i=a.call(d,h,c,f,g,e.data);return e.partial||b.VM.checkRevision(d.compilerInfo),i}}function f(a,b,c){var d=Array.prototype.slice.call(arguments,3),e=function(a,e){return e=e||{},b.apply(this,[a,e.data||c].concat(d))};return e.program=a,e.depth=d.length,e}function g(a,b,c){var d=function(a,d){return d=d||{},b(a,d.data||c)};return d.program=a,d.depth=0,d}function h(a,b,c,d,e,f){var g={partial:!0,helpers:d,partials:e,data:f};if(void 0===a)throw new l("The partial "+b+" could not be found");return a instanceof Function?a(c,g):void 0}function i(){return""}var j={},k=a,l=b,m=c.COMPILER_REVISION,n=c.REVISION_CHANGES;return j.checkRevision=d,j.template=e,j.programWithDepth=f,j.program=g,j.invokePartial=h,j.noop=i,j}(b,c,d),f=function(a,b,c,d,e){"use strict";var f,g=a,h=b,i=c,j=d,k=e,l=function(){var a=new g.HandlebarsEnvironment;return j.extend(a,g),a.SafeString=h,a.Exception=i,a.Utils=j,a.VM=k,a.template=function(b){return k.template(b,a)},a},m=l();return m.create=l,f=m}(d,a,c,b,e);return f}();this["wysihtml5"] = this["wysihtml5"] || {};
 this["wysihtml5"]["tpl"] = this["wysihtml5"]["tpl"] || {};
 
 this["wysihtml5"]["tpl"]["blockquote"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -14605,7 +14605,7 @@ function program17(depth0,data) {
       this.el = el;
       var toolbarOpts = $.extend(true, {}, defaultOptions, options);
       for(var t in toolbarOpts.customTemplates) {
-        if (toolbarOpts.customTemplates.hasOwnProperty(t)) {
+        if (Object.prototype.hasOwnProperty.call(toolbarOpts.customTemplates, t)) {
           wysihtml5.tpl[t] = toolbarOpts.customTemplates[t];
         }
       }
@@ -14647,7 +14647,7 @@ function program17(depth0,data) {
 
         if(options && options.events) {
           for(var eventName in options.events) {
-            if (options.events.hasOwnProperty(eventName)) {
+            if (Object.prototype.hasOwnProperty.call(options.events, eventName)) {
               editor.on(eventName, options.events[eventName]);
             }
           }
@@ -14720,7 +14720,7 @@ function program17(depth0,data) {
           'style': 'display:none'
         });
         var culture = options.locale || defaultOptions.locale || 'en';
-        if(!locale.hasOwnProperty(culture)) {
+        if(!Object.prototype.hasOwnProperty.call(locale, culture)) {
           console.debug('Locale \'' + culture + '\' not found. Available locales are: ' + Object.keys(locale) + '. Falling back to \'en\'.');
           culture = 'en';
         }
