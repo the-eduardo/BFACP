@@ -727,7 +727,7 @@ if(!Array.prototype.indexOf){
 					if (a == 0) {
 						if (b == 0) continue;
 						var t = -c / b;
-						if (0 < t && t < 1) {
+						if (t > 0 && t < 1) {
 							if (i == 0) this.addX(f(t));
 							if (i == 1) this.addY(f(t));
 						}
@@ -737,12 +737,12 @@ if(!Array.prototype.indexOf){
 					var b2ac = Math.pow(b, 2) - 4 * c * a;
 					if (b2ac < 0) continue;
 					var t1 = (-b + Math.sqrt(b2ac)) / (2 * a);
-					if (0 < t1 && t1 < 1) {
+					if (t1 > 0 && t1 < 1) {
 						if (i == 0) this.addX(f(t1));
 						if (i == 1) this.addY(f(t1));
 					}
 					var t2 = (-b - Math.sqrt(b2ac)) / (2 * a);
-					if (0 < t2 && t2 < 1) {
+					if (t2 > 0 && t2 < 1) {
 						if (i == 0) this.addX(f(t2));
 						if (i == 1) this.addY(f(t2));
 					}

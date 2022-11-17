@@ -499,7 +499,7 @@
         };
 
         this.val = function (v) {
-            if (null != v) {
+            if (v != null) {
                 this.cv = this.o.stopper ? max(min(v, this.o.max), this.o.min) : v;
 		this.v = this.cv;
                 this.$.val(this.v);

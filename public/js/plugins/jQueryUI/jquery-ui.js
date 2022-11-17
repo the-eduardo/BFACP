@@ -94,7 +94,7 @@ $.fn.extend({
 function focusable( element, isTabIndexNotNaN ) {
 	var map, mapName, img,
 		nodeName = element.nodeName.toLowerCase();
-	if ( "area" === nodeName ) {
+	if ( nodeName === "area" ) {
 		map = element.parentNode;
 		mapName = map.name;
 		if ( !element.href || !mapName || map.nodeName.toLowerCase() !== "map" ) {
@@ -105,7 +105,7 @@ function focusable( element, isTabIndexNotNaN ) {
 	}
 	return ( /^(input|select|textarea|button|object)$/.test( nodeName ) ?
 		!element.disabled :
-		"a" === nodeName ?
+		nodeName === "a" ?
 			element.href || isTabIndexNotNaN :
 			isTabIndexNotNaN) &&
 		// the element and all of its ancestors must be visible
@@ -888,7 +888,7 @@ var mouse = $.widget("ui.mouse", {
 				return that._mouseDown(event);
 			})
 			.bind("click." + this.widgetName, function(event) {
-				if (true === $.data(event.target, that.widgetName + ".preventClickEvent")) {
+				if ($.data(event.target, that.widgetName + ".preventClickEvent") === true) {
 					$.removeData(event.target, that.widgetName + ".preventClickEvent");
 					event.stopImmediatePropagation();
 					return false;
@@ -947,7 +947,7 @@ var mouse = $.widget("ui.mouse", {
 		}
 
 		// Click event may never have fired (Gecko & Opera)
-		if (true === $.data(event.target, this.widgetName + ".preventClickEvent")) {
+		if ($.data(event.target, this.widgetName + ".preventClickEvent") === true) {
 			$.removeData(event.target, this.widgetName + ".preventClickEvent");
 		}
 
@@ -3001,7 +3001,7 @@ $.widget( "ui.autocomplete", {
 				}
 
 				item = ui.item.data( "ui-autocomplete-item" );
-				if ( false !== this._trigger( "focus", event, { item: item } ) ) {
+				if ( this._trigger( "focus", event, { item: item } ) !== false ) {
 					// use value to match what will end up in the input, if it was a key event
 					if ( event.originalEvent && /^key/.test( event.originalEvent.type ) ) {
 						this._value( item.value );
@@ -3032,7 +3032,7 @@ $.widget( "ui.autocomplete", {
 					});
 				}
 
-				if ( false !== this._trigger( "select", event, { item: item } ) ) {
+				if ( this._trigger( "select", event, { item: item } ) !== false ) {
 					this._value( item.value );
 				}
 				// reset the term after the select event
@@ -7119,7 +7119,7 @@ $.widget("ui.resizable", $.ui.mouse, {
 				axis.css({ zIndex: o.zIndex });
 
 				// TODO : What's going on here?
-				if ("se" === handle) {
+				if (handle === "se") {
 					axis.addClass("ui-icon ui-icon-gripsmall-diagonal-se");
 				}
 
@@ -9537,7 +9537,7 @@ function clamp( value, prop, allowEmpty ) {
 	}
 
 	// for now all property types without mod have min and max
-	return 0 > value ? 0 : type.max < value ? type.max : value;
+	return value < 0 ? 0 : type.max < value ? type.max : value;
 }
 
 function stringParse( string ) {
