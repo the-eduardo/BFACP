@@ -79,7 +79,7 @@
 
         // loop through cache and change volume of all nodes that are using HTML5 Audio
         for (var key in self._howls) {
-          if (self._howls.hasOwnProperty(key) && self._howls[key]._webAudio === false) {
+          if (Object.prototype.hasOwnProperty.call(self._howls, key) && self._howls[key]._webAudio === false) {
             // loop through the audio nodes
             for (var i=0; i<self._howls[key]._audioNode.length; i++) {
               self._howls[key]._audioNode[i].volume = self._howls[key]._volume * self._volume;
@@ -128,7 +128,7 @@
       }
 
       for (var key in self._howls) {
-        if (self._howls.hasOwnProperty(key) && self._howls[key]._webAudio === false) {
+        if (Object.prototype.hasOwnProperty.call(self._howls, key) && self._howls[key]._webAudio === false) {
           // loop through the audio nodes
           for (var i=0; i<self._howls[key]._audioNode.length; i++) {
             self._howls[key]._audioNode[i].muted = muted;

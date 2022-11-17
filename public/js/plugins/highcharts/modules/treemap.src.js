@@ -208,7 +208,7 @@
 			*  - Add node id to parents children list
 			*/  
 			for (key in parentList) {
-				if (parentList.hasOwnProperty(key)) {
+				if (Object.prototype.hasOwnProperty.call(parentList, key)) {
 					if (key !== "") {
 						if (HighchartsAdapter.inArray(key, allIds) === -1) {
 							insertItem(key);
