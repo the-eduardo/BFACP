@@ -111,7 +111,7 @@
                     lineCap: this.$.data('linecap') || 'butt',
                     width: this.$.data('width') || 200,
                     height: this.$.data('height') || 200,
-                    displayInput: this.$.data('displayinput') == null || this.$.data('displayinput'),
+                    displayInput: this.$.data('displayinput') === null || this.$.data('displayinput'),
                     displayPrevious: this.$.data('displayprevious'),
                     fgColor: this.$.data('fgcolor') || '#87CEEB',
                     inputColor: this.$.data('inputcolor'),
@@ -514,7 +514,7 @@
         };
 
         this.val = function (v, triggerRelease) {
-            if (v != null) {
+            if (v !== null) {
 
                 // reverse format
                 v = this.o.parse(v);

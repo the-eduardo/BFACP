@@ -947,16 +947,16 @@ if (!document.createElement('canvas').getContext) {
         // Figure out dimensions so we can do gradient fills
         // properly
         if (p) {
-          if (min.x == null || p.x < min.x) {
+          if (min.x === null || p.x < min.x) {
             min.x = p.x;
           }
-          if (max.x == null || p.x > max.x) {
+          if (max.x === null || p.x > max.x) {
             max.x = p.x;
           }
-          if (min.y == null || p.y < min.y) {
+          if (min.y === null || p.y < min.y) {
             min.y = p.y;
           }
-          if (max.y == null || p.y > max.y) {
+          if (max.y === null || p.y > max.y) {
             max.y = p.y;
           }
         }

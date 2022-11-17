@@ -681,7 +681,7 @@ function computeIntervalUnit(start, end) {
 function computeIntervalAs(unit, start, end) {
 	var val;
 
-	if (end != null) { // given start, end
+	if (end !== null) { // given start, end
 		val = end.diff(start, unit, true);
 	}
 	else if (moment.isDuration(start)) { // given duration
@@ -974,7 +974,7 @@ newMomentProto.time = function(time) {
 		return oldMomentProto.time.apply(this, arguments);
 	}
 
-	if (time == null) { // getter
+	if (time === null) { // getter
 		return moment.duration({
 			hours: this.hours(),
 			minutes: this.minutes(),
@@ -1074,7 +1074,7 @@ newMomentProto.hasZone = function() {
 // this method implicitly marks a zone (will get called upon .utc() and .local())
 newMomentProto.zone = function(tzo) {
 
-	if (tzo != null) { // setter
+	if (tzo !== null) { // setter
 		// these assignments needs to happen before the original zone method is called.
 		// I forget why, something to do with a browser crash.
 		this._ambigTime = false;
@@ -2669,7 +2669,7 @@ var Grid = fc.Grid = RowRenderer.extend({
 		this.colHeadFormat = view.opt('columnFormat') || this.computeColHeadFormat();
 		this.eventTimeFormat = view.opt('timeFormat') || this.computeEventTimeFormat();
 		this.displayEventEnd = view.opt('displayEventEnd');
-		if (this.displayEventEnd == null) {
+		if (this.displayEventEnd === null) {
 			this.displayEventEnd = this.computeDisplayEventEnd();
 		}
 	},
@@ -2697,7 +2697,7 @@ var Grid = fc.Grid = RowRenderer.extend({
 	getCell: function(row, col) {
 		var cell;
 
-		if (col == null) {
+		if (col === null) {
 			if (typeof row === 'number') { // a single-number offset
 				col = row % this.colCnt;
 				row = Math.floor(row / this.colCnt);
@@ -4033,7 +4033,7 @@ function getDraggedElMeta(el) {
 
 		// pluck special-cased date/time properties
 		startTime = eventProps.start;
-		if (startTime == null) { startTime = eventProps.time; } // accept 'time' as well
+		if (startTime === null) { startTime = eventProps.time; } // accept 'time' as well
 		duration = eventProps.duration;
 		stick = eventProps.stick;
 		delete eventProps.start;
@@ -4043,14 +4043,14 @@ function getDraggedElMeta(el) {
 	}
 
 	// fallback to standalone attribute values for each of the date/time properties
-	if (startTime == null) { startTime = el.data(prefix + 'start'); }
-	if (startTime == null) { startTime = el.data(prefix + 'time'); } // accept 'time' as well
-	if (duration == null) { duration = el.data(prefix + 'duration'); }
-	if (stick == null) { stick = el.data(prefix + 'stick'); }
+	if (startTime === null) { startTime = el.data(prefix + 'start'); }
+	if (startTime === null) { startTime = el.data(prefix + 'time'); } // accept 'time' as well
+	if (duration === null) { duration = el.data(prefix + 'duration'); }
+	if (stick === null) { stick = el.data(prefix + 'stick'); }
 
 	// massage into correct data types
-	startTime = startTime != null ? moment.duration(startTime) : null;
-	duration = duration != null ? moment.duration(duration) : null;
+	startTime = startTime !== null ? moment.duration(startTime) : null;
+	duration = duration !== null ? moment.duration(duration) : null;
 	stick = Boolean(stick);
 
 	return { eventProps: eventProps, startTime: startTime, duration: duration, stick: stick };
@@ -6906,7 +6906,7 @@ var View = fc.View = Class.extend({
 	if (options.dayNamesShort) {
 		localeData._weekdaysShort = options.dayNamesShort;
 	}
-	if (options.firstDay != null) {
+	if (options.firstDay !== null) {
 		var _week = createObject(localeData._week); // _week: { dow: # }
 		_week.dow = options.firstDay;
 		localeData._week = _week;
@@ -7067,7 +7067,7 @@ var View = fc.View = Class.extend({
 	// -----------------------------------------------------------------------------------
 
 
-	if (options.defaultDate != null) {
+	if (options.defaultDate !== null) {
 		date = t.moment(options.defaultDate);
 	}
 	else {
@@ -8244,7 +8244,7 @@ function EventManager(options) { // assumed to be a calendar
 		var eventID;
 		var i;
 
-		if (filter == null) { // null or undefined. remove all events
+		if (filter === null) { // null or undefined. remove all events
 			filter = function() { return true; }; // will always match
 		}
 		else if (!$.isFunction(filter)) { // an event ID
@@ -8274,7 +8274,7 @@ function EventManager(options) { // assumed to be a calendar
 		if ($.isFunction(filter)) {
 			return $.grep(cache, filter);
 		}
-		else if (filter != null) { // not null, not undefined. an event ID
+		else if (filter !== null) { // not null, not undefined. an event ID
 			filter += '';
 			return $.grep(cache, function(e) {
 				return e._id == filter;
@@ -8413,7 +8413,7 @@ function EventManager(options) { // assumed to be a calendar
 	// NOTE: Will modify the given object.
 	function normalizeEventDateProps(props) {
 
-		if (props.allDay == null) {
+		if (props.allDay === null) {
 			props.allDay = !(props.start.hasTime() || (props.end && props.end.hasTime()));
 		}
 
@@ -8456,7 +8456,7 @@ function EventManager(options) { // assumed to be a calendar
 		if (!range.end) {
 
 			allDay = range.allDay; // range might be more event-ish than we think
-			if (allDay == null) {
+			if (allDay === null) {
 				allDay = !range.start.hasTime();
 			}
 
@@ -8563,7 +8563,7 @@ function EventManager(options) { // assumed to be a calendar
 		if (props.end === undefined) {
 			props.end = event.end ? event.end.clone() : null;
 		}
-		if (props.allDay == null) { // is null or undefined?
+		if (props.allDay === null) { // is null or undefined?
 			props.allDay = event.allDay;
 		}
 
@@ -8829,7 +8829,7 @@ function EventManager(options) { // assumed to be a calendar
 		};
 
 		// the range must be fully contained by at least one of produced constraint events
-		if (constraint != null) {
+		if (constraint !== null) {
 
 			// not treated as an event! intermediate data structure
 			// TODO: use ranges in the future

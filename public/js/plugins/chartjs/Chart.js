@@ -410,7 +410,7 @@
 			// Filter out null values since these would min() to zero
 			var values = [];
 			each(valuesArray, function( v ){
-				v == null || values.push( v );
+				v === null || values.push( v );
 			});
 			var minValue = min(values),
 			    maxValue = max(values);
@@ -2068,10 +2068,10 @@
 						}
 
 						if (this.backgroundColors && this.backgroundColors.length == this.valuesCount) {
-							if (centerOffset == null)
+							if (centerOffset === null)
 								centerOffset = this.calculateCenterOffset(this.max);
 
-							if (outerPosition == null)
+							if (outerPosition === null)
 								outerPosition = this.getPointPosition(i, centerOffset);
 
 							var previousOuterPosition = this.getPointPosition(i === 0 ? this.valuesCount - 1 : i - 1, centerOffset);

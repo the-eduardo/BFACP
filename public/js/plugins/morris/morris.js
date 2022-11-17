@@ -21,10 +21,10 @@ Licensed under the BSD-2-Clause License.
     function EventEmitter() {}
 
     EventEmitter.prototype.on = function(name, handler) {
-      if (this.handlers == null) {
+      if (this.handlers === null) {
         this.handlers = {};
       }
-      if (this.handlers[name] == null) {
+      if (this.handlers[name] === null) {
         this.handlers[name] = [];
       }
       this.handlers[name].push(handler);
@@ -34,7 +34,7 @@ Licensed under the BSD-2-Clause License.
     EventEmitter.prototype.fire = function() {
       var args, handler, name, _i, _len, _ref, _results;
       name = arguments[0], args = arguments.length >= 2 ? __slice.call(arguments, 1) : [];
-      if ((this.handlers != null) && (this.handlers[name] != null)) {
+      if ((this.handlers !== null) && (this.handlers[name] !== null)) {
         _ref = this.handlers[name];
         _results = [];
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
@@ -51,7 +51,7 @@ Licensed under the BSD-2-Clause License.
 
   Morris.commas = function(num) {
     var absnum, intnum, ret, strabsnum;
-    if (num != null) {
+    if (num !== null) {
       ret = num < 0 ? "-" : "";
       absnum = Math.abs(num);
       intnum = Math.floor(absnum).toFixed(0);
@@ -81,7 +81,7 @@ Licensed under the BSD-2-Clause License.
       } else {
         this.el = $(options.element);
       }
-      if ((this.el == null) || this.el.length === 0) {
+      if ((this.el === null) || this.el.length === 0) {
         throw new Error("Graph container element not found");
       }
       if (this.el.css('position') === 'static') {
@@ -153,7 +153,7 @@ Licensed under the BSD-2-Clause License.
       }
       if (this.options.resize) {
         $(window).bind('resize', function(evt) {
-          if (_this.timeoutId != null) {
+          if (_this.timeoutId !== null) {
             window.clearTimeout(_this.timeoutId);
           }
           return _this.timeoutId = window.setTimeout(_this.resizeHandler, 100);
@@ -198,14 +198,14 @@ Licensed under the BSD-2-Clause License.
 
     Grid.prototype.setData = function(data, redraw) {
       var e, idx, index, maxGoal, minGoal, ret, row, step, total, y, ykey, ymax, ymin, yval, _ref;
-      if (redraw == null) {
+      if (redraw === null) {
         redraw = true;
       }
       this.options.data = data;
-      if ((data == null) || data.length === 0) {
+      if ((data === null) || data.length === 0) {
         this.data = [];
         this.raphael.clear();
-        if (this.hover != null) {
+        if (this.hover !== null) {
           this.hover.hide();
         }
         return;
@@ -215,8 +215,8 @@ Licensed under the BSD-2-Clause License.
       if (this.options.goals.length > 0) {
         minGoal = Math.min.apply(Math, this.options.goals);
         maxGoal = Math.max.apply(Math, this.options.goals);
-        ymin = ymin != null ? Math.min(ymin, minGoal) : minGoal;
-        ymax = ymax != null ? Math.max(ymax, maxGoal) : maxGoal;
+        ymin = ymin !== null ? Math.min(ymin, minGoal) : minGoal;
+        ymax = ymax !== null ? Math.max(ymax, maxGoal) : maxGoal;
       }
       this.data = (function() {
         var _i, _len, _results;
@@ -251,14 +251,14 @@ Licensed under the BSD-2-Clause License.
               if (typeof yval === 'string') {
                 yval = parseFloat(yval);
               }
-              if ((yval != null) && typeof yval !== 'number') {
+              if ((yval !== null) && typeof yval !== 'number') {
                 yval = null;
               }
-              if (yval != null) {
+              if (yval !== null) {
                 if (this.cumulative) {
                   total += yval;
                 } else {
-                  if (ymax != null) {
+                  if (ymax !== null) {
                     ymax = Math.max(yval, ymax);
                     ymin = Math.min(yval, ymin);
                   } else {
@@ -266,7 +266,7 @@ Licensed under the BSD-2-Clause License.
                   }
                 }
               }
-              if (this.cumulative && (total != null)) {
+              if (this.cumulative && (total !== null)) {
                 ymax = Math.max(total, ymax);
                 ymin = Math.min(total, ymin);
               }
@@ -346,12 +346,12 @@ Licensed under the BSD-2-Clause License.
         if (boundaryOption.slice(0, 4) === 'auto') {
           if (boundaryOption.length > 5) {
             suggestedValue = parseInt(boundaryOption.slice(5), 10);
-            if (currentValue == null) {
+            if (currentValue === null) {
               return suggestedValue;
             }
             return Math[boundaryType](currentValue, suggestedValue);
           } else {
-            if (currentValue != null) {
+            if (currentValue !== null) {
               return currentValue;
             } else {
               return 0;
@@ -475,7 +475,7 @@ Licensed under the BSD-2-Clause License.
 
     Grid.prototype.measureText = function(text, angle) {
       var ret, tt;
-      if (angle == null) {
+      if (angle === null) {
         angle = 0;
       }
       tt = this.raphael.text(100, 100, text).attr('font-size', this.options.gridTextSize).attr('font-family', this.options.gridTextFamily).attr('font-weight', this.options.gridTextWeight).rotate(angle);
@@ -653,7 +653,7 @@ Licensed under the BSD-2-Clause License.
     };
 
     function Hover(options) {
-      if (options == null) {
+      if (options === null) {
         options = {};
       }
       this.options = $.extend({}, Morris.Hover.defaults, options);
@@ -683,7 +683,7 @@ Licensed under the BSD-2-Clause License.
       hoverWidth = this.el.outerWidth();
       hoverHeight = this.el.outerHeight();
       left = Math.min(Math.max(0, x - hoverWidth / 2), parentWidth - hoverWidth);
-      if (y != null) {
+      if (y !== null) {
         top = y - hoverHeight - 10;
         if (top < 0) {
           top = y + 10;
@@ -769,7 +769,7 @@ Licensed under the BSD-2-Clause License.
           _results1 = [];
           for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
             y = _ref1[_j];
-            if (y != null) {
+            if (y !== null) {
               _results1.push(this.transY(y));
             } else {
               _results1.push(y);
@@ -783,7 +783,7 @@ Licensed under the BSD-2-Clause License.
           _results1 = [];
           for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
             y = _ref1[_j];
-            if (y != null) {
+            if (y !== null) {
               _results1.push(y);
             }
           }
@@ -828,7 +828,7 @@ Licensed under the BSD-2-Clause License.
 
     Line.prototype.displayHoverForRow = function(index) {
       var _ref;
-      if (index != null) {
+      if (index !== null) {
         (_ref = this.hover).update.apply(_ref, this.hoverContentForRow(index));
         return this.hilight(index);
       } else {
@@ -913,7 +913,7 @@ Licensed under the BSD-2-Clause License.
           label.transform("t" + offset + ",0...");
         }
         labelBox = label.getBBox();
-        if (((prevLabelMargin == null) || prevLabelMargin >= labelBox.x + labelBox.width || (prevAngleMargin != null) && prevAngleMargin >= labelBox.x) && labelBox.x >= 0 && (labelBox.x + labelBox.width) < _this.el.width()) {
+        if (((prevLabelMargin === null) || prevLabelMargin >= labelBox.x + labelBox.width || (prevAngleMargin !== null) && prevAngleMargin >= labelBox.x) && labelBox.x >= 0 && (labelBox.x + labelBox.width) < _this.el.width()) {
           if (_this.options.xLabelAngle !== 0) {
             margin = 1.25 * _this.options.gridTextSize / Math.sin(_this.options.xLabelAngle * Math.PI / 180.0);
             prevAngleMargin = labelBox.x - margin;
@@ -971,7 +971,7 @@ Licensed under the BSD-2-Clause License.
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         row = _ref[_i];
         circle = null;
-        if (row._y[index] != null) {
+        if (row._y[index] !== null) {
           circle = this.drawLinePoint(row._x, row._y[index], this.colorFor(row, index, 'point'), index);
         }
         _results.push(this.seriesPoints[index].push(circle));
@@ -998,8 +998,8 @@ Licensed under the BSD-2-Clause License.
       };
       for (i = _i = 0, _len = coords.length; _i < _len; i = ++_i) {
         coord = coords[i];
-        if (coord.y != null) {
-          if (prevCoord.y != null) {
+        if (coord.y !== null) {
+          if (prevCoord.y !== null) {
             if (smooth) {
               g = grads[i];
               lg = grads[i - 1];
@@ -1013,7 +1013,7 @@ Licensed under the BSD-2-Clause License.
               path += "L" + coord.x + "," + coord.y;
             }
           } else {
-            if (!smooth || (grads[i] != null)) {
+            if (!smooth || (grads[i] !== null)) {
               path += "M" + coord.x + "," + coord.y;
             }
           }
@@ -1031,18 +1031,18 @@ Licensed under the BSD-2-Clause License.
       _results = [];
       for (i = _i = 0, _len = coords.length; _i < _len; i = ++_i) {
         coord = coords[i];
-        if (coord.y != null) {
+        if (coord.y !== null) {
           nextCoord = coords[i + 1] || {
             y: null
           };
           prevCoord = coords[i - 1] || {
             y: null
           };
-          if ((prevCoord.y != null) && (nextCoord.y != null)) {
+          if ((prevCoord.y !== null) && (nextCoord.y !== null)) {
             _results.push(grad(prevCoord, nextCoord));
-          } else if (prevCoord.y != null) {
+          } else if (prevCoord.y !== null) {
             _results.push(grad(prevCoord, coord));
-          } else if (nextCoord.y != null) {
+          } else if (nextCoord.y !== null) {
             _results.push(grad(coord, nextCoord));
           } else {
             _results.push(null);
@@ -1433,7 +1433,7 @@ Licensed under the BSD-2-Clause License.
           _results1 = [];
           for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
             y = _ref1[_j];
-            if (y != null) {
+            if (y !== null) {
               _results1.push(this.transY(y));
             } else {
               _results1.push(null);
@@ -1470,7 +1470,7 @@ Licensed under the BSD-2-Clause License.
           offset = -0.5 * textBox.width * Math.cos(this.options.xLabelAngle * Math.PI / 180.0);
           label.transform("t" + offset + ",0...");
         }
-        if (((prevLabelMargin == null) || prevLabelMargin >= labelBox.x + labelBox.width || (prevAngleMargin != null) && prevAngleMargin >= labelBox.x) && labelBox.x >= 0 && (labelBox.x + labelBox.width) < this.el.width()) {
+        if (((prevLabelMargin === null) || prevLabelMargin >= labelBox.x + labelBox.width || (prevAngleMargin !== null) && prevAngleMargin >= labelBox.x) && labelBox.x >= 0 && (labelBox.x + labelBox.width) < this.el.width()) {
           if (this.options.xLabelAngle !== 0) {
             margin = 1.25 * this.options.gridTextSize / Math.sin(this.options.xLabelAngle * Math.PI / 180.0);
             prevAngleMargin = labelBox.x - margin;
@@ -1617,7 +1617,7 @@ Licensed under the BSD-2-Clause License.
     };
 
     Bar.prototype.roundedRect = function(x, y, w, h, r) {
-      if (r == null) {
+      if (r === null) {
         r = [0, 0, 0, 0];
       }
       return ["M", x, r[0] + y, "Q", x, y, x + r[0], y, "L", x + w - r[1], y, "Q", x + w, y, x + w, y + r[1], "L", x + w, y + h - r[2], "Q", x + w, y + h, x + w - r[2], y + h, "L", x + r[3], y + h, "Q", x, y + h, x, y + h - r[3], "Z"];
@@ -1661,7 +1661,7 @@ Licensed under the BSD-2-Clause License.
       this.raphael = new Raphael(this.el[0]);
       if (this.options.resize) {
         $(window).bind('resize', function(evt) {
-          if (_this.timeoutId != null) {
+          if (_this.timeoutId !== null) {
             window.clearTimeout(_this.timeoutId);
           }
           return _this.timeoutId = window.setTimeout(_this.resizeHandler, 100);
@@ -1778,7 +1778,7 @@ Licensed under the BSD-2-Clause License.
     Donut.prototype.drawEmptyDonutLabel = function(xPos, yPos, color, fontSize, fontWeight) {
       var text;
       text = this.raphael.text(xPos, yPos, '').attr('font-size', fontSize).attr('fill', color);
-      if (fontWeight != null) {
+      if (fontWeight !== null) {
         text.attr('font-weight', fontWeight);
       }
       return text;

@@ -331,7 +331,7 @@ if(!Array.prototype.indexOf){
 	//		 forceRedraw: function => will call the function on every frame, if it returns true, will redraw
 	this.canvg = function (target, s, opts) {
 		// no parameters
-		if (target == null && s == null && opts == null) {
+		if (target === null && s === null && opts === null) {
 			var svgTags = document.getElementsByTagName('svg');
 			for (var i=0; i<svgTags.length; i++) {
 				var svgTag = svgTags[i];
@@ -354,7 +354,7 @@ if(!Array.prototype.indexOf){
 		
 		// reuse class per canvas
 		var svg;
-		if (target.svg == null) {
+		if (target.svg === null) {
 			svg = build();
 			target.svg = svg;
 		}
@@ -401,7 +401,7 @@ if(!Array.prototype.indexOf){
 				this.width = function() { return this.Current().width; }
 				this.height = function() { return this.Current().height; }
 				this.ComputeSize = function(d) {
-					if (d != null && typeof(d) == 'number') return d;
+					if (d !== null && typeof(d) == 'number') return d;
 					if (d == 'x') return this.width();
 					if (d == 'y') return this.height();
 					return Math.sqrt(Math.pow(this.width(), 2) + Math.pow(this.height(), 2)) / Math.sqrt(2);			
@@ -459,7 +459,7 @@ if(!Array.prototype.indexOf){
 			this.value = value;
 			
 			this.hasValue = function() {
-				return (this.value != null && this.value !== '');
+				return (this.value !== null && this.value !== '');
 			}
 							
 			// return the numerical value of the property
@@ -491,7 +491,7 @@ if(!Array.prototype.indexOf){
 				// augment the current color value with the opacity
 				addOpacity: function(opacity) {
 					var newValue = that.value;
-					if (opacity != null && opacity != '') {
+					if (opacity !== null && opacity != '') {
 						var color = new RGBColor(that.value);
 						if (color.ok) {
 							newValue = 'rgba(' + color.r + ', ' + color.g + ', ' + color.b + ', ' + opacity + ')';
@@ -517,12 +517,12 @@ if(!Array.prototype.indexOf){
 					var def = this.getDefinition();
 					
 					// gradient
-					if (def != null && def.createGradient) {
+					if (def !== null && def.createGradient) {
 						return def.createGradient(svg.ctx, e);
 					}
 					
 					// pattern
-					if (def != null && def.createPattern) {
+					if (def !== null && def.createPattern) {
 						return def.createPattern(svg.ctx, e);
 					}
 					
@@ -595,7 +595,7 @@ if(!Array.prototype.indexOf){
 			this.Weights = ['normal','bold','bolder','lighter','100','200','300','400','500','600','700','800','900','inherit'];
 			
 			this.CreateFont = function(fontStyle, fontVariant, fontWeight, fontSize, fontFamily, inherit) { 
-				var f = inherit != null ? this.Parse(inherit) : this.CreateFont('', '', '', '', '', svg.ctx.font);
+				var f = inherit !== null ? this.Parse(inherit) : this.CreateFont('', '', '', '', '', svg.ctx.font);
 				return { 
 					fontFamily: fontFamily || f.fontFamily, 
 					fontSize: fontSize || f.fontSize, 
@@ -672,7 +672,7 @@ if(!Array.prototype.indexOf){
 			this.height = function() { return this.y2 - this.y1; }
 			
 			this.addPoint = function(x, y) {	
-				if (x != null) {
+				if (x !== null) {
 					if (isNaN(this.x1) || isNaN(this.x2)) {
 						this.x1 = x;
 						this.x2 = x;
@@ -681,7 +681,7 @@ if(!Array.prototype.indexOf){
 					if (x > this.x2) this.x2 = x;
 				}
 			
-				if (y != null) {
+				if (y !== null) {
 					if (isNaN(this.y1) || isNaN(this.y2)) {
 						this.y1 = y;
 						this.y2 = y;
@@ -891,7 +891,7 @@ if(!Array.prototype.indexOf){
 			else if (meetOrSlice == 'slice') ctx.scale(scaleMax, scaleMax); 	
 			
 			// translate
-			ctx.translate(minX == null ? 0 : -minX, minY == null ? 0 : -minY);			
+			ctx.translate(minX === null ? 0 : -minX, minY === null ? 0 : -minY);			
 		}
 		
 		// elements
@@ -905,7 +905,7 @@ if(!Array.prototype.indexOf){
 			// get or create attribute
 			this.attribute = function(name, createIfNotExists) {
 				var a = this.attributes[name];
-				if (a != null) return a;
+				if (a !== null) return a;
 							
 				a = new svg.Property(name, '');
 				if (createIfNotExists == true) this.attributes[name] = a;
@@ -915,17 +915,17 @@ if(!Array.prototype.indexOf){
 			// get or create style, crawls up node tree
 			this.style = function(name, createIfNotExists) {
 				var s = this.styles[name];
-				if (s != null) return s;
+				if (s !== null) return s;
 				
 				var a = this.attribute(name);
-				if (a != null && a.hasValue()) {
+				if (a !== null && a.hasValue()) {
 					return a;
 				}
 				
 				var p = this.parent;
-				if (p != null) {
+				if (p !== null) {
 					var ps = p.style(name);
-					if (ps != null && ps.hasValue()) {
+					if (ps !== null && ps.hasValue()) {
 						return ps;
 					}
 				}
@@ -948,11 +948,11 @@ if(!Array.prototype.indexOf){
 						// mask
 						if (this.attribute('mask').hasValue()) {
 							var mask = this.attribute('mask').Definition.getDefinition();
-							if (mask != null) mask.apply(ctx, this);
+							if (mask !== null) mask.apply(ctx, this);
 						}
 						else if (this.style('filter').hasValue()) {
 							var filter = this.style('filter').Definition.getDefinition();
-							if (filter != null) filter.apply(ctx, this);
+							if (filter !== null) filter.apply(ctx, this);
 						}
 						else this.renderChildren(ctx);				
 					this.clearContext(ctx);
@@ -983,7 +983,7 @@ if(!Array.prototype.indexOf){
 				this.children.push(child);			
 			}
 				
-			if (node != null && node.nodeType == 1) { //ELEMENT_NODE
+			if (node !== null && node.nodeType == 1) { //ELEMENT_NODE
 				// add children
 				for (var i=0; i<node.childNodes.length; i++) {
 					var childNode = node.childNodes[i];
@@ -998,7 +998,7 @@ if(!Array.prototype.indexOf){
 										
 				// add tag styles
 				var styles = svg.Styles[node.nodeName];
-				if (styles != null) {
+				if (styles !== null) {
 					for (var name in styles) {
 						this.styles[name] = styles[name];
 					}
@@ -1009,13 +1009,13 @@ if(!Array.prototype.indexOf){
 					var classes = svg.compressSpaces(this.attribute('class').value).split(' ');
 					for (var j=0; j<classes.length; j++) {
 						styles = svg.Styles['.'+classes[j]];
-						if (styles != null) {
+						if (styles !== null) {
 							for (var name in styles) {
 								this.styles[name] = styles[name];
 							}
 						}
 						styles = svg.Styles[node.nodeName+'.'+classes[j]];
-						if (styles != null) {
+						if (styles !== null) {
 							for (var name in styles) {
 								this.styles[name] = styles[name];
 							}
@@ -1038,7 +1038,7 @@ if(!Array.prototype.indexOf){
 
 				// add id
 				if (this.attribute('id').hasValue()) {
-					if (svg.Definitions[this.attribute('id').value] == null) {
+					if (svg.Definitions[this.attribute('id').value] === null) {
 						svg.Definitions[this.attribute('id').value] = this;
 					}
 				}
@@ -1053,7 +1053,7 @@ if(!Array.prototype.indexOf){
 				// fill
 				if (this.style('fill').Definition.isUrl()) {
 					var fs = this.style('fill').Definition.getFillStyle(this);
-					if (fs != null) ctx.fillStyle = fs;
+					if (fs !== null) ctx.fillStyle = fs;
 				}
 				else if (this.style('fill').hasValue()) {
 					var fillStyle = this.style('fill');
@@ -1064,7 +1064,7 @@ if(!Array.prototype.indexOf){
 				// stroke
 				if (this.style('stroke').Definition.isUrl()) {
 					var fs = this.style('stroke').Definition.getFillStyle(this);
-					if (fs != null) ctx.strokeStyle = fs;
+					if (fs !== null) ctx.strokeStyle = fs;
 				}
 				else if (this.style('stroke').hasValue()) {
 					var strokeStyle = this.style('stroke');
@@ -1095,7 +1095,7 @@ if(!Array.prototype.indexOf){
 				// clip
 				if (this.attribute('clip-path').hasValue()) {
 					var clip = this.attribute('clip-path').Definition.getDefinition();
-					if (clip != null) clip.apply(ctx);
+					if (clip !== null) clip.apply(ctx);
 				}
 				
 				// opacity
@@ -1111,7 +1111,7 @@ if(!Array.prototype.indexOf){
 			this.base(node);
 			
 			this.path = function(ctx) {
-				if (ctx != null) ctx.beginPath();
+				if (ctx !== null) ctx.beginPath();
 				return new svg.BoundingBox();
 			}
 			
@@ -1122,7 +1122,7 @@ if(!Array.prototype.indexOf){
 				if (ctx.strokeStyle != '') ctx.stroke();
 				
 				var markers = this.getMarkers();
-				if (markers != null) {
+				if (markers !== null) {
 					if (this.style('marker-start').Definition.isUrl()) {
 						var marker = this.style('marker-start').Definition.getDefinition();
 						marker.render(ctx, markers[0][0], markers[0][1]);
@@ -1240,7 +1240,7 @@ if(!Array.prototype.indexOf){
 				if (this.attribute('rx').hasValue() && !this.attribute('ry').hasValue()) ry = rx;
 				if (this.attribute('ry').hasValue() && !this.attribute('rx').hasValue()) rx = ry;
 				
-				if (ctx != null) {
+				if (ctx !== null) {
 					ctx.beginPath();
 					ctx.moveTo(x + rx, y);
 					ctx.lineTo(x + width - rx, y);
@@ -1269,7 +1269,7 @@ if(!Array.prototype.indexOf){
 				var cy = this.attribute('cy').Length.toPixels('y');
 				var r = this.attribute('r').Length.toPixels();
 			
-				if (ctx != null) {
+				if (ctx !== null) {
 					ctx.beginPath();
 					ctx.arc(cx, cy, r, 0, Math.PI * 2, true); 
 					ctx.closePath();
@@ -1292,7 +1292,7 @@ if(!Array.prototype.indexOf){
 				var cx = this.attribute('cx').Length.toPixels('x');
 				var cy = this.attribute('cy').Length.toPixels('y');
 				
-				if (ctx != null) {
+				if (ctx !== null) {
 					ctx.beginPath();
 					ctx.moveTo(cx, cy - ry);
 					ctx.bezierCurveTo(cx + (KAPPA * rx), cy - ry,  cx + rx, cy - (KAPPA * ry), cx + rx, cy);
@@ -1321,7 +1321,7 @@ if(!Array.prototype.indexOf){
 			this.path = function(ctx) {
 				var points = this.getPoints();
 				
-				if (ctx != null) {
+				if (ctx !== null) {
 					ctx.beginPath();
 					ctx.moveTo(points[0].x, points[0].y);
 					ctx.lineTo(points[1].x, points[1].y);
@@ -1346,13 +1346,13 @@ if(!Array.prototype.indexOf){
 			this.points = svg.CreatePath(this.attribute('points').value);
 			this.path = function(ctx) {
 				var bb = new svg.BoundingBox(this.points[0].x, this.points[0].y);
-				if (ctx != null) {
+				if (ctx !== null) {
 					ctx.beginPath();
 					ctx.moveTo(this.points[0].x, this.points[0].y);
 				}
 				for (var i=1; i<this.points.length; i++) {
 					bb.addPoint(this.points[i].x, this.points[i].y);
-					if (ctx != null) ctx.lineTo(this.points[i].x, this.points[i].y);
+					if (ctx !== null) ctx.lineTo(this.points[i].x, this.points[i].y);
 				}
 				return bb;
 			}
@@ -1376,7 +1376,7 @@ if(!Array.prototype.indexOf){
 			this.basePath = this.path;
 			this.path = function(ctx) {
 				var bb = this.basePath(ctx);
-				if (ctx != null) {
+				if (ctx !== null) {
 					ctx.lineTo(this.points[0].x, this.points[0].y);
 					ctx.closePath();
 				}
@@ -1422,7 +1422,7 @@ if(!Array.prototype.indexOf){
 				
 				this.isCommandOrEnd = function() {
 					if (this.isEnd()) return true;
-					return this.tokens[this.i + 1].match(/^[A-Za-z]$/) != null;
+					return this.tokens[this.i + 1].match(/^[A-Za-z]$/) !== null;
 				}
 				
 				this.isRelativeCommand = function() {
@@ -1480,10 +1480,10 @@ if(!Array.prototype.indexOf){
 				
 				this.addMarker = function(p, from, priorTo) {
 					// if the last angle isn't filled in because we didn't have this point yet ...
-					if (priorTo != null && this.angles.length > 0 && this.angles[this.angles.length-1] == null) {
+					if (priorTo !== null && this.angles.length > 0 && this.angles[this.angles.length-1] === null) {
 						this.angles[this.angles.length-1] = this.points[this.points.length-1].angleTo(priorTo);
 					}
-					this.addMarkerAngle(p, from == null ? null : from.angleTo(p));
+					this.addMarkerAngle(p, from === null ? null : from.angleTo(p));
 				}
 				
 				this.addMarkerAngle = function(p, a) {
@@ -1494,9 +1494,9 @@ if(!Array.prototype.indexOf){
 				this.getMarkerPoints = function() { return this.points; }
 				this.getMarkerAngles = function() {
 					for (var i=0; i<this.angles.length; i++) {
-						if (this.angles[i] == null) {
+						if (this.angles[i] === null) {
 							for (var j=i+1; j<this.angles.length; j++) {
-								if (this.angles[j] != null) {
+								if (this.angles[j] !== null) {
 									this.angles[i] = this.angles[j];
 									break;
 								}
@@ -1512,7 +1512,7 @@ if(!Array.prototype.indexOf){
 				pp.reset();
 
 				var bb = new svg.BoundingBox();
-				if (ctx != null) ctx.beginPath();
+				if (ctx !== null) ctx.beginPath();
 				while (!pp.isEnd()) {
 					pp.nextCommand();
 					switch (pp.command.toUpperCase()) {
@@ -1520,13 +1520,13 @@ if(!Array.prototype.indexOf){
 						var p = pp.getAsCurrentPoint();
 						pp.addMarker(p);
 						bb.addPoint(p.x, p.y);
-						if (ctx != null) ctx.moveTo(p.x, p.y);
+						if (ctx !== null) ctx.moveTo(p.x, p.y);
 						pp.start = pp.current;
 						while (!pp.isCommandOrEnd()) {
 							var p = pp.getAsCurrentPoint();
 							pp.addMarker(p, pp.start);
 							bb.addPoint(p.x, p.y);
-							if (ctx != null) ctx.lineTo(p.x, p.y);
+							if (ctx !== null) ctx.lineTo(p.x, p.y);
 						}
 						break;
 					case 'L':
@@ -1535,7 +1535,7 @@ if(!Array.prototype.indexOf){
 							var p = pp.getAsCurrentPoint();
 							pp.addMarker(p, c);
 							bb.addPoint(p.x, p.y);
-							if (ctx != null) ctx.lineTo(p.x, p.y);
+							if (ctx !== null) ctx.lineTo(p.x, p.y);
 						}
 						break;
 					case 'H':
@@ -1544,7 +1544,7 @@ if(!Array.prototype.indexOf){
 							pp.addMarker(newP, pp.current);
 							pp.current = newP;
 							bb.addPoint(pp.current.x, pp.current.y);
-							if (ctx != null) ctx.lineTo(pp.current.x, pp.current.y);
+							if (ctx !== null) ctx.lineTo(pp.current.x, pp.current.y);
 						}
 						break;
 					case 'V':
@@ -1553,7 +1553,7 @@ if(!Array.prototype.indexOf){
 							pp.addMarker(newP, pp.current);
 							pp.current = newP;
 							bb.addPoint(pp.current.x, pp.current.y);
-							if (ctx != null) ctx.lineTo(pp.current.x, pp.current.y);
+							if (ctx !== null) ctx.lineTo(pp.current.x, pp.current.y);
 						}
 						break;
 					case 'C':
@@ -1564,7 +1564,7 @@ if(!Array.prototype.indexOf){
 							var cp = pp.getAsCurrentPoint();
 							pp.addMarker(cp, cntrl, p1);
 							bb.addBezierCurve(curr.x, curr.y, p1.x, p1.y, cntrl.x, cntrl.y, cp.x, cp.y);
-							if (ctx != null) ctx.bezierCurveTo(p1.x, p1.y, cntrl.x, cntrl.y, cp.x, cp.y);
+							if (ctx !== null) ctx.bezierCurveTo(p1.x, p1.y, cntrl.x, cntrl.y, cp.x, cp.y);
 						}
 						break;
 					case 'S':
@@ -1575,7 +1575,7 @@ if(!Array.prototype.indexOf){
 							var cp = pp.getAsCurrentPoint();
 							pp.addMarker(cp, cntrl, p1);
 							bb.addBezierCurve(curr.x, curr.y, p1.x, p1.y, cntrl.x, cntrl.y, cp.x, cp.y);
-							if (ctx != null) ctx.bezierCurveTo(p1.x, p1.y, cntrl.x, cntrl.y, cp.x, cp.y);
+							if (ctx !== null) ctx.bezierCurveTo(p1.x, p1.y, cntrl.x, cntrl.y, cp.x, cp.y);
 						}
 						break;
 					case 'Q':
@@ -1585,7 +1585,7 @@ if(!Array.prototype.indexOf){
 							var cp = pp.getAsCurrentPoint();
 							pp.addMarker(cp, cntrl, cntrl);
 							bb.addQuadraticCurve(curr.x, curr.y, cntrl.x, cntrl.y, cp.x, cp.y);
-							if (ctx != null) ctx.quadraticCurveTo(cntrl.x, cntrl.y, cp.x, cp.y);
+							if (ctx !== null) ctx.quadraticCurveTo(cntrl.x, cntrl.y, cp.x, cp.y);
 						}
 						break;
 					case 'T':
@@ -1596,7 +1596,7 @@ if(!Array.prototype.indexOf){
 							var cp = pp.getAsCurrentPoint();
 							pp.addMarker(cp, cntrl, cntrl);
 							bb.addQuadraticCurve(curr.x, curr.y, cntrl.x, cntrl.y, cp.x, cp.y);
-							if (ctx != null) ctx.quadraticCurveTo(cntrl.x, cntrl.y, cp.x, cp.y);
+							if (ctx !== null) ctx.quadraticCurveTo(cntrl.x, cntrl.y, cp.x, cp.y);
 						}
 						break;
 					case 'A':
@@ -1661,7 +1661,7 @@ if(!Array.prototype.indexOf){
 							pp.addMarkerAngle(cp, ad + (sweepFlag == 0 ? 1 : -1) * Math.PI / 2);
 
 							bb.addPoint(cp.x, cp.y); // TODO: this is too naive, make it better
-							if (ctx != null) {
+							if (ctx !== null) {
 								var r = rx > ry ? rx : ry;
 								var sx = rx > ry ? 1 : rx / ry;
 								var sy = rx > ry ? ry / rx : 1;
@@ -1677,7 +1677,7 @@ if(!Array.prototype.indexOf){
 						}
 						break;
 					case 'Z':
-						if (ctx != null) ctx.closePath();
+						if (ctx !== null) ctx.closePath();
 						pp.current = pp.start;
 					}
 				}
@@ -1935,7 +1935,7 @@ if(!Array.prototype.indexOf){
 			
 			this.update = function(delta) {	
 				// set initial value
-				if (this.initialValue == null) {
+				if (this.initialValue === null) {
 					this.initialValue = this.getProperty().value;
 				}
 			
@@ -2096,7 +2096,7 @@ if(!Array.prototype.indexOf){
 			this.base = svg.Element.RenderedElementBase;
 			this.base(node);
 			
-			if (node != null) {
+			if (node !== null) {
 				// add children
 				this.children = [];
 				for (var i=0; i<node.childNodes.length; i++) {
@@ -2175,19 +2175,19 @@ if(!Array.prototype.indexOf){
 					if (i>0 && text[i-1]!=' ' && (i == text.length-1 || text[i+1]==' ')) arabicForm = 'initial';
 					if (typeof(font.glyphs[c]) != 'undefined') {
 						glyph = font.glyphs[c][arabicForm];
-						if (glyph == null && font.glyphs[c].type == 'glyph') glyph = font.glyphs[c];
+						if (glyph === null && font.glyphs[c].type == 'glyph') glyph = font.glyphs[c];
 					}
 				}
 				else {
 					glyph = font.glyphs[c];
 				}
-				if (glyph == null) glyph = font.missingGlyph;
+				if (glyph === null) glyph = font.missingGlyph;
 				return glyph;
 			}
 			
 			this.renderChildren = function(ctx) {
 				var customFont = this.parent.style('font-family').Definition.getDefinition();
-				if (customFont != null) {
+				if (customFont !== null) {
 					var fontSize = this.parent.style('font-size').numValueOrDefault(svg.Font.Parse(svg.ctx.font).fontSize);
 					var fontStyle = this.parent.style('font-style').valueOrDefault(svg.Font.Parse(svg.ctx.font).fontStyle);
 					var text = this.getText();
@@ -2226,7 +2226,7 @@ if(!Array.prototype.indexOf){
 			
 			this.measureText = function(ctx) {
 				var customFont = this.parent.style('font-family').Definition.getDefinition();
-				if (customFont != null) {
+				if (customFont !== null) {
 					var fontSize = this.parent.style('font-size').numValueOrDefault(svg.Font.Parse(svg.ctx.font).fontSize);
 					var measure = 0;
 					var text = this.getText();
@@ -2275,7 +2275,7 @@ if(!Array.prototype.indexOf){
 			
 			this.getText = function() {
 				var element = this.attribute('xlink:href').Definition.getDefinition();
-				if (element != null) return element.children[0].getText();
+				if (element !== null) return element.children[0].getText();
 			}
 		}
 		svg.Element.tref.prototype = new svg.Element.TextElementBase;		
@@ -2429,7 +2429,7 @@ if(!Array.prototype.indexOf){
 								var prop = cssProps[k].indexOf(':');
 								var name = cssProps[k].substr(0, prop);
 								var value = cssProps[k].substr(prop + 1, cssProps[k].length - prop);
-								if (name != null && value != null) {
+								if (name !== null && value !== null) {
 									props[svg.trim(name)] = new svg.Property(svg.trim(name), svg.trim(value));
 								}
 							}
@@ -2479,12 +2479,12 @@ if(!Array.prototype.indexOf){
 			
 			this.path = function(ctx) {
 				var element = this.getDefinition();
-				if (element != null) element.path(ctx);
+				if (element !== null) element.path(ctx);
 			}
 			
 			this.renderChildren = function(ctx) {
 				var element = this.getDefinition();
-				if (element != null) element.render(ctx);
+				if (element !== null) element.render(ctx);
 			}
 		}
 		svg.Element.use.prototype = new svg.Element.RenderedElementBase;
@@ -2739,11 +2739,11 @@ if(!Array.prototype.indexOf){
 			// bind mouse
 			if (svg.opts['ignoreMouse'] != true) {
 				ctx.canvas.onclick = function(e) {
-					var p = mapXY(new svg.Point(e != null ? e.clientX : event.clientX, e != null ? e.clientY : event.clientY));
+					var p = mapXY(new svg.Point(e !== null ? e.clientX : event.clientX, e !== null ? e.clientY : event.clientY));
 					svg.Mouse.onclick(p.x, p.y);
 				};
 				ctx.canvas.onmousemove = function(e) {
-					var p = mapXY(new svg.Point(e != null ? e.clientX : event.clientX, e != null ? e.clientY : event.clientY));
+					var p = mapXY(new svg.Point(e !== null ? e.clientX : event.clientX, e !== null ? e.clientY : event.clientY));
 					svg.Mouse.onmousemove(p.x, p.y);
 				};
 			}
@@ -2772,9 +2772,9 @@ if(!Array.prototype.indexOf){
 				var cHeight = ctx.canvas.clientHeight || ctx.canvas.height;
 				svg.ViewPort.SetCurrent(cWidth, cHeight);		
 				
-				if (svg.opts != null && svg.opts['offsetX'] != null) e.attribute('x', true).value = svg.opts['offsetX'];
-				if (svg.opts != null && svg.opts['offsetY'] != null) e.attribute('y', true).value = svg.opts['offsetY'];
-				if (svg.opts != null && svg.opts['scaleWidth'] != null && svg.opts['scaleHeight'] != null) {
+				if (svg.opts !== null && svg.opts['offsetX'] !== null) e.attribute('x', true).value = svg.opts['offsetX'];
+				if (svg.opts !== null && svg.opts['offsetY'] !== null) e.attribute('y', true).value = svg.opts['offsetY'];
+				if (svg.opts !== null && svg.opts['scaleWidth'] !== null && svg.opts['scaleHeight'] !== null) {
 					var xRatio = 1, yRatio = 1;
 					if (e.attribute('width').hasValue()) xRatio = e.attribute('width').Length.toPixels('x') / svg.opts['scaleWidth'];
 					if (e.attribute('height').hasValue()) yRatio = e.attribute('height').Length.toPixels('y') / svg.opts['scaleHeight'];
@@ -2792,7 +2792,7 @@ if(!Array.prototype.indexOf){
 				e.render(ctx);
 				if (isFirstRender) {
 					isFirstRender = false;
-					if (svg.opts != null && typeof(svg.opts['renderCallback']) == 'function') svg.opts['renderCallback']();
+					if (svg.opts !== null && typeof(svg.opts['renderCallback']) == 'function') svg.opts['renderCallback']();
 				}			
 			}
 			
@@ -2822,7 +2822,7 @@ if(!Array.prototype.indexOf){
 				}
 				
 				// need update from redraw?
-				if (svg.opts != null && typeof(svg.opts['forceRedraw']) == 'function') {
+				if (svg.opts !== null && typeof(svg.opts['forceRedraw']) == 'function') {
 					if (svg.opts['forceRedraw']() == true) needUpdate = true;
 				}
 				

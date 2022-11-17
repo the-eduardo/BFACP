@@ -511,7 +511,7 @@ More detail and specific examples can be found in the included HTML file.
 
 							var c = options.series.pie.label.background.color;
 
-							if (c == null) {
+							if (c === null) {
 								c = slice.color;
 							}
 
@@ -695,7 +695,7 @@ More detail and specific examples can be found in the included HTML file.
 		}
 
 		function unhighlight(s) {
-			if (s == null) {
+			if (s === null) {
 				highlights = [];
 				plot.triggerRedrawOverlay();
 			}
