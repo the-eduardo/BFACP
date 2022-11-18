@@ -469,7 +469,7 @@ S2.define("almond", function(){});
 S2.define('jquery',[],function () {
   var _$ = jQuery || $;
 
-  if (_$ == null && console && console.error) {
+  if (_$ === null && console && console.error) {
     console.error(
       'Select2: An instance of jQuery or a jQuery-compatible library was not ' +
       'found. Make sure that you are including jQuery before Select2 on your ' +
@@ -611,7 +611,7 @@ S2.define('select2/utils',[
     this.listeners = this.listeners || {};
 
     // Params should always come in as an array
-    if (params == null) {
+    if (params === null) {
       params = [];
     }
 
@@ -822,7 +822,7 @@ S2.define('select2/results',[
 
     var $options = [];
 
-    if (data.results == null || data.results.length === 0) {
+    if (data.results === null || data.results.length === 0) {
       if (this.$results.children().length === 0) {
         this.trigger('results:message', {
           message: 'noResults'
@@ -894,8 +894,8 @@ S2.define('select2/results',[
         // id needs to be converted to a string when comparing
         var id = '' + item.id;
 
-        if ((item.element != null && item.element.selected) ||
-            (item.element == null && $.inArray(id, selectedIds) > -1)) {
+        if ((item.element !== null && item.element.selected) ||
+            (item.element === null && $.inArray(id, selectedIds) > -1)) {
           $option.attr('aria-selected', 'true');
         } else {
           $option.attr('aria-selected', 'false');
@@ -939,11 +939,11 @@ S2.define('select2/results',[
       attrs['aria-disabled'] = 'true';
     }
 
-    if (data.id == null) {
+    if (data.id === null) {
       delete attrs['aria-selected'];
     }
 
-    if (data._resultId != null) {
+    if (data._resultId !== null) {
       option.id = data._resultId;
     }
 
@@ -1269,7 +1269,7 @@ S2.define('select2/results',[
 
     var content = template(result, container);
 
-    if (content == null) {
+    if (content === null) {
       container.style.display = 'none';
     } else if (typeof content === 'string') {
       container.innerHTML = escapeMarkup(content);
@@ -1330,9 +1330,9 @@ S2.define('select2/selection/base',[
 
     this._tabindex = 0;
 
-    if (this.$element.data('old-tabindex') != null) {
+    if (this.$element.data('old-tabindex') !== null) {
       this._tabindex = this.$element.data('old-tabindex');
-    } else if (this.$element.attr('tabindex') != null) {
+    } else if (this.$element.attr('tabindex') !== null) {
       this._tabindex = this.$element.attr('tabindex');
     }
 
@@ -1737,7 +1737,7 @@ S2.define('select2/selection/allowClear',[
 
     decorated.call(this, container, $container);
 
-    if (this.placeholder == null) {
+    if (this.placeholder === null) {
       if (this.options.get('debug') && window.console && console.error) {
         console.error(
           'Select2: The `allowClear` option should be used in combination ' +
@@ -3008,7 +3008,7 @@ S2.define('select2/data/base',[
 
     id += Utils.generateChars(4);
 
-    if (data.id != null) {
+    if (data.id !== null) {
       id += '-' + data.id.toString();
     } else {
       id += '-' + Utils.generateChars(4);
@@ -3223,7 +3223,7 @@ S2.define('select2/data/select',[
 
     data = $.data($option[0], 'data');
 
-    if (data != null) {
+    if (data !== null) {
       return data;
     }
 
@@ -3281,15 +3281,15 @@ S2.define('select2/data/select',[
       disabled: false
     };
 
-    if (item.id != null) {
+    if (item.id !== null) {
       item.id = item.id.toString();
     }
 
-    if (item.text != null) {
+    if (item.text !== null) {
       item.text = item.text.toString();
     }
 
-    if (item._resultId == null && item.id && this.container != null) {
+    if (item._resultId === null && item.id && this.container !== null) {
       item._resultId = this.generateResultId(this.container, item);
     }
 
@@ -3393,7 +3393,7 @@ S2.define('select2/data/ajax',[
   function AjaxAdapter ($element, options) {
     this.ajaxOptions = this._applyDefaults(options.get('ajax'));
 
-    if (this.ajaxOptions.processResults != null) {
+    if (this.ajaxOptions.processResults !== null) {
       this.processResults = this.ajaxOptions.processResults;
     }
 
@@ -3430,7 +3430,7 @@ S2.define('select2/data/ajax',[
     var matches = [];
     var self = this;
 
-    if (this._request != null) {
+    if (this._request !== null) {
       // JSONP requests cannot always be aborted
       if ($.isFunction(this._request.abort)) {
         this._request.abort();
@@ -3481,7 +3481,7 @@ S2.define('select2/data/ajax',[
       self._request = $request;
     }
 
-    if (this.ajaxOptions.delay && params.term != null) {
+    if (this.ajaxOptions.delay && params.term !== null) {
       if (this._queryTimeout) {
         window.clearTimeout(this._queryTimeout);
       }
@@ -3532,7 +3532,7 @@ S2.define('select2/data/tags',[
 
     this._removeOldTags();
 
-    if (params.term == null || params.page != null) {
+    if (params.term === null || params.page !== null) {
       decorated.call(this, params, callback);
       return;
     }
@@ -3544,7 +3544,7 @@ S2.define('select2/data/tags',[
         var option = data[i];
 
         var checkChildren = (
-          option.children != null &&
+          option.children !== null &&
           !wrapper({
             results: option.children
           }, true)
@@ -3570,7 +3570,7 @@ S2.define('select2/data/tags',[
 
       var tag = self.createTag(params);
 
-      if (tag != null) {
+      if (tag !== null) {
         var $option = self.option(tag);
         $option.attr('data-select2-tag', true);
 
@@ -3718,7 +3718,7 @@ S2.define('select2/data/tokenizer',[
 
       var data = createTag(partParams);
 
-      if (data == null) {
+      if (data === null) {
         i++;
         continue;
       }
@@ -3815,7 +3815,7 @@ S2.define('select2/data/maximumSelectionLength',[
       var self = this;
 
       this.current(function (currentData) {
-        var count = currentData != null ? currentData.length : 0;
+        var count = currentData !== null ? currentData.length : 0;
         if (self.maximumSelectionLength > 0 &&
           count >= self.maximumSelectionLength) {
           self.trigger('results:message', {
@@ -3947,7 +3947,7 @@ S2.define('select2/dropdown/search',[
     });
 
     container.on('results:all', function (params) {
-      if (params.query.term == null || params.query.term === '') {
+      if (params.query.term === null || params.query.term === '') {
         var showSearch = self.showSearch(params);
 
         if (showSearch) {
@@ -4298,7 +4298,7 @@ S2.define('select2/dropdown/attachBody',[
       css.top = container.top - parentOffset.top - dropdown.height;
     }
 
-    if (newDirection != null) {
+    if (newDirection !== null) {
       this.$dropdown
         .removeClass('select2-dropdown--below select2-dropdown--above')
         .addClass('select2-dropdown--' + newDirection);
@@ -4390,7 +4390,7 @@ S2.define('select2/dropdown/selectOnClose',[
   };
 
   SelectOnClose.prototype._handleSelectOnClose = function (_, params) {
-    if (params && params.originalSelect2Event != null) {
+    if (params && params.originalSelect2Event !== null) {
       var event = params.originalSelect2Event;
 
       // Don't select an item if the close event was triggered from a select or
@@ -4411,8 +4411,8 @@ S2.define('select2/dropdown/selectOnClose',[
 
     // Don't re-select already selected resulte
     if (
-      (data.element != null && data.element.selected) ||
-      (data.element == null && data.selected)
+      (data.element !== null && data.element.selected) ||
+      (data.element === null && data.selected)
     ) {
       return;
     }
@@ -4565,10 +4565,10 @@ S2.define('select2/defaults',[
   Defaults.prototype.apply = function (options) {
     options = $.extend(true, {}, this.defaults, options);
 
-    if (options.dataAdapter == null) {
-      if (options.ajax != null) {
+    if (options.dataAdapter === null) {
+      if (options.ajax !== null) {
         options.dataAdapter = AjaxData;
-      } else if (options.data != null) {
+      } else if (options.data !== null) {
         options.dataAdapter = ArrayData;
       } else {
         options.dataAdapter = SelectData;
@@ -4599,14 +4599,14 @@ S2.define('select2/defaults',[
         options.dataAdapter = Utils.Decorate(options.dataAdapter, Tags);
       }
 
-      if (options.tokenSeparators != null || options.tokenizer != null) {
+      if (options.tokenSeparators !== null || options.tokenizer !== null) {
         options.dataAdapter = Utils.Decorate(
           options.dataAdapter,
           Tokenizer
         );
       }
 
-      if (options.query != null) {
+      if (options.query !== null) {
         var Query = require(options.amdBase + 'compat/query');
 
         options.dataAdapter = Utils.Decorate(
@@ -4615,7 +4615,7 @@ S2.define('select2/defaults',[
         );
       }
 
-      if (options.initSelection != null) {
+      if (options.initSelection !== null) {
         var InitSelection = require(options.amdBase + 'compat/initSelection');
 
         options.dataAdapter = Utils.Decorate(
@@ -4625,17 +4625,17 @@ S2.define('select2/defaults',[
       }
     }
 
-    if (options.resultsAdapter == null) {
+    if (options.resultsAdapter === null) {
       options.resultsAdapter = ResultsList;
 
-      if (options.ajax != null) {
+      if (options.ajax !== null) {
         options.resultsAdapter = Utils.Decorate(
           options.resultsAdapter,
           InfiniteScroll
         );
       }
 
-      if (options.placeholder != null) {
+      if (options.placeholder !== null) {
         options.resultsAdapter = Utils.Decorate(
           options.resultsAdapter,
           HidePlaceholder
@@ -4650,7 +4650,7 @@ S2.define('select2/defaults',[
       }
     }
 
-    if (options.dropdownAdapter == null) {
+    if (options.dropdownAdapter === null) {
       if (options.multiple) {
         options.dropdownAdapter = Dropdown;
       } else {
@@ -4674,9 +4674,9 @@ S2.define('select2/defaults',[
       }
 
       if (
-        options.dropdownCssClass != null ||
-        options.dropdownCss != null ||
-        options.adaptDropdownCssClass != null
+        options.dropdownCssClass !== null ||
+        options.dropdownCss !== null ||
+        options.adaptDropdownCssClass !== null
       ) {
         var DropdownCSS = require(options.amdBase + 'compat/dropdownCss');
 
@@ -4692,7 +4692,7 @@ S2.define('select2/defaults',[
       );
     }
 
-    if (options.selectionAdapter == null) {
+    if (options.selectionAdapter === null) {
       if (options.multiple) {
         options.selectionAdapter = MultipleSelection;
       } else {
@@ -4700,7 +4700,7 @@ S2.define('select2/defaults',[
       }
 
       // Add the placeholder mixin if a placeholder was specified
-      if (options.placeholder != null) {
+      if (options.placeholder !== null) {
         options.selectionAdapter = Utils.Decorate(
           options.selectionAdapter,
           Placeholder
@@ -4722,9 +4722,9 @@ S2.define('select2/defaults',[
       }
 
       if (
-        options.containerCssClass != null ||
-        options.containerCss != null ||
-        options.adaptContainerCssClass != null
+        options.containerCssClass !== null ||
+        options.containerCss !== null ||
+        options.adaptContainerCssClass !== null
       ) {
         var ContainerCSS = require(options.amdBase + 'compat/containerCss');
 
@@ -4833,7 +4833,7 @@ S2.define('select2/defaults',[
           var matches = matcher(params, child);
 
           // If there wasn't a match, remove the object in the array
-          if (matches == null) {
+          if (matches === null) {
             match.children.splice(c, 1);
           }
         }
@@ -4912,7 +4912,7 @@ S2.define('select2/options',[
   function Options (options, $element) {
     this.options = options;
 
-    if ($element != null) {
+    if ($element !== null) {
       this.fromElement($element);
     }
 
@@ -4931,15 +4931,15 @@ S2.define('select2/options',[
   Options.prototype.fromElement = function ($e) {
     var excludedData = ['select2'];
 
-    if (this.options.multiple == null) {
+    if (this.options.multiple === null) {
       this.options.multiple = $e.prop('multiple');
     }
 
-    if (this.options.disabled == null) {
+    if (this.options.disabled === null) {
       this.options.disabled = $e.prop('disabled');
     }
 
-    if (this.options.language == null) {
+    if (this.options.language === null) {
       if ($e.prop('lang')) {
         this.options.language = $e.prop('lang').toLowerCase();
       } else if ($e.closest('[lang]').prop('lang')) {
@@ -4947,7 +4947,7 @@ S2.define('select2/options',[
       }
     }
 
-    if (this.options.dir == null) {
+    if (this.options.dir === null) {
       if ($e.prop('dir')) {
         this.options.dir = $e.prop('dir');
       } else if ($e.closest('[dir]').prop('dir')) {
@@ -5033,7 +5033,7 @@ S2.define('select2/core',[
   './keys'
 ], function ($, Options, Utils, KEYS) {
   var Select2 = function ($element, options) {
-    if ($element.data('select2') != null) {
+    if ($element.data('select2') !== null) {
       $element.data('select2').destroy();
     }
 
@@ -5119,9 +5119,9 @@ S2.define('select2/core',[
   Select2.prototype._generateId = function ($element) {
     var id = '';
 
-    if ($element.attr('id') != null) {
+    if ($element.attr('id') !== null) {
       id = $element.attr('id');
-    } else if ($element.attr('name') != null) {
+    } else if ($element.attr('name') !== null) {
       id = $element.attr('name') + '-' + Utils.generateChars(2);
     } else {
       id = Utils.generateChars(4);
@@ -5138,7 +5138,7 @@ S2.define('select2/core',[
 
     var width = this._resolveWidth(this.$element, this.options.get('width'));
 
-    if (width != null) {
+    if (width !== null) {
       $container.css('width', width);
     }
   };
@@ -5149,7 +5149,7 @@ S2.define('select2/core',[
     if (method == 'resolve') {
       var styleWidth = this._resolveWidth($element, 'style');
 
-      if (styleWidth != null) {
+      if (styleWidth !== null) {
         return styleWidth;
       }
 
@@ -5225,7 +5225,7 @@ S2.define('select2/core',[
       window.MozMutationObserver
     ;
 
-    if (observer != null) {
+    if (observer !== null) {
       this._observer = new observer(function (mutations) {
         $.each(mutations, self._syncA);
         $.each(mutations, self._syncS);
@@ -5527,7 +5527,7 @@ S2.define('select2/core',[
       );
     }
 
-    if (args == null || args.length === 0) {
+    if (args === null || args.length === 0) {
       args = [true];
     }
 
@@ -5562,7 +5562,7 @@ S2.define('select2/core',[
       );
     }
 
-    if (args == null || args.length === 0) {
+    if (args === null || args.length === 0) {
       return this.$element.val();
     }
 
@@ -5584,7 +5584,7 @@ S2.define('select2/core',[
       this.$element[0].detachEvent('onpropertychange', this._syncA);
     }
 
-    if (this._observer != null) {
+    if (this._observer !== null) {
       this._observer.disconnect();
       this._observer = null;
     } else if (this.$element[0].removeEventListener) {
@@ -5668,7 +5668,7 @@ S2.define('select2/compat/utils',[
         if (this.indexOf('select2-') !== 0) {
           adapted = adapter(this);
 
-          if (adapted != null) {
+          if (adapted !== null) {
             replacements.push(adapted);
           }
         }
@@ -5714,7 +5714,7 @@ S2.define('select2/compat/containerCss',[
       containerCssAdapter = function (clazz) {
         var adapted = _cssAdapter(clazz);
 
-        if (adapted != null) {
+        if (adapted !== null) {
           // Append the old one along with the adapted one
           return adapted + ' ' + clazz;
         }
@@ -5771,7 +5771,7 @@ S2.define('select2/compat/dropdownCss',[
       dropdownCssAdapter = function (clazz) {
         var adapted = _cssAdapter(clazz);
 
-        if (adapted != null) {
+        if (adapted !== null) {
           // Append the old one along with the adapted one
           return adapted + ' ' + clazz;
         }
@@ -5975,7 +5975,7 @@ S2.define('select2/compat/matcher',[
     function wrappedMatcher (params, data) {
       var match = $.extend(true, {}, data);
 
-      if (params.term == null || $.trim(params.term) === '') {
+      if (params.term === null || $.trim(params.term) === '') {
         return match;
       }
 
@@ -6364,7 +6364,7 @@ S2.define('jquery.select2',[
   './select2/core',
   './select2/defaults'
 ], function ($, _, Select2, Defaults) {
-  if ($.fn.select2 == null) {
+  if ($.fn.select2 === null) {
     // All methods that should return the element
     var thisMethods = ['open', 'close', 'destroy'];
 
@@ -6386,7 +6386,7 @@ S2.define('jquery.select2',[
         this.each(function () {
           var instance = $(this).data('select2');
 
-          if (instance == null && window.console && console.error) {
+          if (instance === null && window.console && console.error) {
             console.error(
               'The select2(\'' + options + '\') method was called on an ' +
               'element that is not using Select2.'
@@ -6408,7 +6408,7 @@ S2.define('jquery.select2',[
     };
   }
 
-  if ($.fn.select2.defaults == null) {
+  if ($.fn.select2.defaults === null) {
     $.fn.select2.defaults = Defaults;
   }
 

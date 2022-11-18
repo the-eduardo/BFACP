@@ -34,14 +34,14 @@
 
   now = function() {
     var _ref;
-    return (_ref = typeof performance !== "undefined" && performance !== null ? typeof performance.now === "function" ? performance.now() : void 0 : void 0) != null ? _ref : +(new Date);
+    return (_ref = typeof performance !== "undefined" && performance !== null ? typeof performance.now === "function" ? performance.now() : void 0 : void 0) !== null ? _ref : +(new Date);
   };
 
   requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
 
   cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame;
 
-  if (requestAnimationFrame == null) {
+  if (requestAnimationFrame === null) {
     requestAnimationFrame = function(fn) {
       return setTimeout(fn, 50);
     };
@@ -87,7 +87,7 @@
         for (key in source) {
           if (!__hasProp.call(source, key)) continue;
           val = source[key];
-          if ((out[key] != null) && typeof out[key] === 'object' && (val != null) && typeof val === 'object') {
+          if ((out[key] !== null) && typeof out[key] === 'object' && (val !== null) && typeof val === 'object') {
             extend(out[key], val);
           } else {
             out[key] = val;
@@ -111,10 +111,10 @@
 
   getFromDOM = function(key, json) {
     var data, e, el;
-    if (key == null) {
+    if (key === null) {
       key = 'options';
     }
-    if (json == null) {
+    if (json === null) {
       json = true;
     }
     el = document.querySelector("[data-pace-" + key + "]");
@@ -138,13 +138,13 @@
 
     Evented.prototype.on = function(event, handler, ctx, once) {
       var _base;
-      if (once == null) {
+      if (once === null) {
         once = false;
       }
-      if (this.bindings == null) {
+      if (this.bindings === null) {
         this.bindings = {};
       }
-      if ((_base = this.bindings)[event] == null) {
+      if ((_base = this.bindings)[event] === null) {
         _base[event] = [];
       }
       return this.bindings[event].push({
@@ -160,10 +160,10 @@
 
     Evented.prototype.off = function(event, handler) {
       var i, _ref, _results;
-      if (((_ref = this.bindings) != null ? _ref[event] : void 0) == null) {
+      if (((_ref = this.bindings) !== null ? _ref[event] : void 0) === null) {
         return;
       }
-      if (handler == null) {
+      if (handler === null) {
         return delete this.bindings[event];
       } else {
         i = 0;
@@ -182,12 +182,12 @@
     Evented.prototype.trigger = function() {
       var args, ctx, event, handler, i, once, _ref, _ref1, _results;
       event = arguments[0], args = arguments.length >= 2 ? __slice.call(arguments, 1) : [];
-      if ((_ref = this.bindings) != null ? _ref[event] : void 0) {
+      if ((_ref = this.bindings) !== null ? _ref[event] : void 0) {
         i = 0;
         _results = [];
         while (i < this.bindings[event].length) {
           _ref1 = this.bindings[event][i], handler = _ref1.handler, ctx = _ref1.ctx, once = _ref1.once;
-          handler.apply(ctx != null ? ctx : this, args);
+          handler.apply(ctx !== null ? ctx : this, args);
           if (once) {
             _results.push(this.bindings[event].splice(i, 1));
           } else {
@@ -237,7 +237,7 @@
 
     Bar.prototype.getElement = function() {
       var targetElement;
-      if (this.el == null) {
+      if (this.el === null) {
         targetElement = document.querySelector(options.target);
         if (!targetElement) {
           throw new NoTargetError;
@@ -247,7 +247,7 @@
         document.body.className = document.body.className.replace(/pace-done/g, '');
         document.body.className += ' pace-running';
         this.el.innerHTML = '<div class="pace-progress">\n  <div class="pace-progress-inner"></div>\n</div>\n<div class="pace-activity"></div>';
-        if (targetElement.firstChild != null) {
+        if (targetElement.firstChild !== null) {
           targetElement.insertBefore(this.el, targetElement.firstChild);
         } else {
           targetElement.appendChild(this.el);
@@ -281,7 +281,7 @@
 
     Bar.prototype.render = function() {
       var el, key, progressStr, transform, _j, _len1, _ref2;
-      if (document.querySelector(options.target) == null) {
+      if (document.querySelector(options.target) === null) {
         return false;
       }
       el = this.getElement();
@@ -319,7 +319,7 @@
 
     Events.prototype.trigger = function(name, val) {
       var binding, _j, _len1, _ref2, _results;
-      if (this.bindings[name] != null) {
+      if (this.bindings[name] !== null) {
         _ref2 = this.bindings[name];
         _results = [];
         for (_j = 0, _len1 = _ref2.length; _j < _len1; _j++) {
@@ -332,7 +332,7 @@
 
     Events.prototype.on = function(name, fn) {
       var _base;
-      if ((_base = this.bindings)[name] == null) {
+      if ((_base = this.bindings)[name] === null) {
         _base[name] = [];
       }
       return this.bindings[name].push(fn);
@@ -353,7 +353,7 @@
     _results = [];
     for (key in from.prototype) {
       try {
-        if ((to[key] == null) && typeof from[key] !== 'function') {
+        if ((to[key] === null) && typeof from[key] !== 'function') {
           if (typeof Object.defineProperty === 'function') {
             _results.push(Object.defineProperty(to, key, {
               get: function() {
@@ -397,7 +397,7 @@
 
   shouldTrack = function(method) {
     var _ref2;
-    if (method == null) {
+    if (method === null) {
       method = 'GET';
     }
     if (ignoreStack[0] === 'track') {
@@ -443,7 +443,7 @@
       try {
         extendNative(window.XMLHttpRequest, _XMLHttpRequest);
       } catch (_error) {}
-      if (_XDomainRequest != null) {
+      if (_XDomainRequest !== null) {
         window.XDomainRequest = function() {
           var req;
           req = new _XDomainRequest;
@@ -454,10 +454,10 @@
           extendNative(window.XDomainRequest, _XDomainRequest);
         } catch (_error) {}
       }
-      if ((_WebSocket != null) && options.ajax.trackWebSockets) {
+      if ((_WebSocket !== null) && options.ajax.trackWebSockets) {
         window.WebSocket = function(url, protocols) {
           var req;
-          if (protocols != null) {
+          if (protocols !== null) {
             req = new _WebSocket(url, protocols);
           } else {
             req = new _WebSocket(url);
@@ -485,7 +485,7 @@
   _intercept = null;
 
   getIntercept = function() {
-    if (_intercept == null) {
+    if (_intercept === null) {
       _intercept = new RequestIntercept;
     }
     return _intercept;
@@ -579,7 +579,7 @@
       var event, size, _j, _len1, _onreadystatechange, _ref2,
         _this = this;
       this.progress = 0;
-      if (window.ProgressEvent != null) {
+      if (window.ProgressEvent !== null) {
         size = null;
         request.addEventListener('progress', function(evt) {
           if (evt.lengthComputable) {
@@ -634,11 +634,11 @@
   ElementMonitor = (function() {
     function ElementMonitor(options) {
       var selector, _j, _len1, _ref2;
-      if (options == null) {
+      if (options === null) {
         options = {};
       }
       this.elements = [];
-      if (options.selectors == null) {
+      if (options.selectors === null) {
         options.selectors = [];
       }
       _ref2 = options.selectors;
@@ -688,10 +688,10 @@
     function DocumentMonitor() {
       var _onreadystatechange, _ref2,
         _this = this;
-      this.progress = (_ref2 = this.states[document.readyState]) != null ? _ref2 : 100;
+      this.progress = (_ref2 = this.states[document.readyState]) !== null ? _ref2 : 100;
       _onreadystatechange = document.onreadystatechange;
       document.onreadystatechange = function() {
-        if (_this.states[document.readyState] != null) {
+        if (_this.states[document.readyState] !== null) {
           _this.progress = _this.states[document.readyState];
         }
         return typeof _onreadystatechange === "function" ? _onreadystatechange.apply(null, arguments) : void 0;
@@ -740,14 +740,14 @@
       this.rate = options.initialRate;
       this.catchup = 0;
       this.progress = this.lastProgress = 0;
-      if (this.source != null) {
+      if (this.source !== null) {
         this.progress = result(this.source, 'progress');
       }
     }
 
     Scaler.prototype.tick = function(frameTime, val) {
       var scaling;
-      if (val == null) {
+      if (val === null) {
         val = result(this.source, 'progress');
       }
       if (val >= 100) {
@@ -799,7 +799,7 @@
     }
   };
 
-  if (window.history.pushState != null) {
+  if (window.history.pushState !== null) {
     _pushState = window.history.pushState;
     window.history.pushState = function() {
       handlePushState();
@@ -807,7 +807,7 @@
     };
   }
 
-  if (window.history.replaceState != null) {
+  if (window.history.replaceState !== null) {
     _replaceState = window.history.replaceState;
     window.history.replaceState = function() {
       handlePushState();
@@ -832,7 +832,7 @@
         sources.push(new SOURCE_KEYS[type](options[type]));
       }
     }
-    _ref4 = (_ref3 = options.extraSources) != null ? _ref3 : [];
+    _ref4 = (_ref3 = options.extraSources) !== null ? _ref3 : [];
     for (_k = 0, _len2 = _ref4.length; _k < _len2; _k++) {
       source = _ref4[_k];
       sources.push(new source(options));
@@ -847,7 +847,7 @@
     Pace.running = false;
     bar.destroy();
     cancelAnimation = true;
-    if (animation != null) {
+    if (animation !== null) {
       if (typeof cancelAnimationFrame === "function") {
         cancelAnimationFrame(animation);
       }
@@ -875,11 +875,11 @@
       done = true;
       for (i = _j = 0, _len1 = sources.length; _j < _len1; i = ++_j) {
         source = sources[i];
-        scalerList = scalers[i] != null ? scalers[i] : scalers[i] = [];
-        elements = (_ref2 = source.elements) != null ? _ref2 : [source];
+        scalerList = scalers[i] !== null ? scalers[i] : scalers[i] = [];
+        elements = (_ref2 = source.elements) !== null ? _ref2 : [source];
         for (j = _k = 0, _len2 = elements.length; _k < _len2; j = ++_k) {
           element = elements[j];
-          scaler = scalerList[j] != null ? scalerList[j] : scalerList[j] = new Scaler(element);
+          scaler = scalerList[j] !== null ? scalerList[j] : scalerList[j] = new Scaler(element);
           done &= scaler.done;
           if (scaler.done) {
             continue;

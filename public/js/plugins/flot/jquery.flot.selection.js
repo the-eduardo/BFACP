@@ -111,11 +111,11 @@ The plugin allso adds the following methods to the plot object:
             document.body.focus();
 
             // prevent text selection and drag in old-school browsers
-            if (document.onselectstart !== undefined && savedhandlers.onselectstart == null) {
+            if (document.onselectstart !== undefined && savedhandlers.onselectstart === null) {
                 savedhandlers.onselectstart = document.onselectstart;
                 document.onselectstart = function () { return false; };
             }
-            if (document.ondrag !== undefined && savedhandlers.ondrag == null) {
+            if (document.ondrag !== undefined && savedhandlers.ondrag === null) {
                 savedhandlers.ondrag = document.ondrag;
                 document.ondrag = function () { return false; };
             }
@@ -200,7 +200,7 @@ The plugin allso adds the following methods to the plot object:
         }
 
         function updateSelection(pos) {
-            if (pos.pageX == null)
+            if (pos.pageX === null)
                 return;
 
             setSelectionPos(selection.second, pos);
@@ -247,7 +247,7 @@ The plugin allso adds the following methods to the plot object:
             }
 
             // auto-reverse as an added bonus
-            if (from != null && to != null && from > to) {
+            if (from !== null && to !== null && from > to) {
                 var tmp = from;
                 from = to;
                 to = tmp;
@@ -299,7 +299,7 @@ The plugin allso adds the following methods to the plot object:
 
         plot.hooks.bindEvents.push(function(plot, eventHolder) {
             var o = plot.getOptions();
-            if (o.selection.mode != null) {
+            if (o.selection.mode !== null) {
                 eventHolder.mousemove(onMouseMove);
                 eventHolder.mousedown(onMouseDown);
             }

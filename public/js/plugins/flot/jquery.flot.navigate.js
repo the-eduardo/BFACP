@@ -250,18 +250,18 @@ Licensed under the MIT License ~ http://threedubmedia.googlecode.com/files/MIT-L
 
                 //Check that we are in panRange
                 if (pr) {
-                    if (pr[0] != null && min < pr[0]) {
+                    if (pr[0] !== null && min < pr[0]) {
                         min = pr[0];
                     }
-                    if (pr[1] != null && max > pr[1]) {
+                    if (pr[1] !== null && max > pr[1]) {
                         max = pr[1];
                     }
                 }
 
                 var range = max - min;
                 if (zr &&
-                    ((zr[0] != null && range < zr[0]) ||
-                     (zr[1] != null && range > zr[1])))
+                    ((zr[0] !== null && range < zr[0]) ||
+                     (zr[1] !== null && range > zr[1])))
                     return;
             
                 opts.min = min;
@@ -299,13 +299,13 @@ Licensed under the MIT License ~ http://threedubmedia.googlecode.com/files/MIT-L
                 
                 if (pr) {
                     // check whether we hit the wall
-                    if (pr[0] != null && pr[0] > min) {
+                    if (pr[0] !== null && pr[0] > min) {
                         d = pr[0] - min;
                         min += d;
                         max += d;
                     }
                     
-                    if (pr[1] != null && pr[1] < max) {
+                    if (pr[1] !== null && pr[1] < max) {
                         d = pr[1] - max;
                         min += d;
                         max += d;

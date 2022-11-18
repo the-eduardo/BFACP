@@ -221,7 +221,7 @@ if ( !$( "<a>" ).outerWidth( 1 ).jquery ) {
 // support: jQuery <1.8
 if ( !$.fn.addBack ) {
 	$.fn.addBack = function( selector ) {
-		return this.add( selector == null ?
+		return this.add( selector === null ?
 			this.prevObject : this.prevObject.filter( selector )
 		);
 	};
@@ -319,7 +319,7 @@ var uuid = 0,
 	slice = Array.prototype.slice,
 	_cleanData = $.cleanData;
 $.cleanData = function( elems ) {
-	for ( var i = 0, elem; (elem = elems[i]) != null; i++ ) {
+	for ( var i = 0, elem; (elem = elems[i]) !== null; i++ ) {
 		try {
 			$( elem ).triggerHandler( "remove" );
 		// http://bugs.jquery.com/ticket/8235
@@ -5632,7 +5632,7 @@ $.widget( "ui.autocomplete", {
 	},
 
 	search: function( value, event ) {
-		value = value != null ? value : this._value();
+		value = value !== null ? value : this._value();
 
 		// always save the actual value, not the one passed as an argument
 		this.term = this._value();
@@ -6610,7 +6610,7 @@ each( spaces, function( spaceName, space ) {
 function clamp( value, prop, allowEmpty ) {
 	var type = propTypes[ prop.type ] || {};
 
-	if ( value == null ) {
+	if ( value === null ) {
 		return (allowEmpty || !prop.def) ? null : prop.def;
 	}
 
@@ -6722,7 +6722,7 @@ color.fn = jQuery.extend( color.prototype, {
 
 							// if the value was null, we don't need to copy it
 							// if the key was alpha, we don't need to copy it either
-							if ( key === "alpha" || red[ key ] == null ) {
+							if ( key === "alpha" || red[ key ] === null ) {
 								return;
 							}
 							inst[ cache ] = space.to( inst._rgba );
@@ -6757,7 +6757,7 @@ color.fn = jQuery.extend( color.prototype, {
 			if (isCache) {
 				localCache = inst[ space.cache ] || space.to && space.to( inst._rgba ) || [];
 				each( space.props, function( _, prop ) {
-					if ( isCache[ prop.idx ] != null ) {
+					if ( isCache[ prop.idx ] !== null ) {
 						same = ( isCache[ prop.idx ] === localCache[ prop.idx ] );
 						return same;
 					}
@@ -6829,7 +6829,7 @@ color.fn = jQuery.extend( color.prototype, {
 	toRgbaString: function() {
 		var prefix = "rgba(",
 			rgba = jQuery.map( this._rgba, function( v, i ) {
-				return v == null ? ( i > 2 ? 1 : 0 ) : v;
+				return v === null ? ( i > 2 ? 1 : 0 ) : v;
 			});
 
 		if ( rgba[ 3 ] === 1 ) {
@@ -6842,7 +6842,7 @@ color.fn = jQuery.extend( color.prototype, {
 	toHslaString: function() {
 		var prefix = "hsla(",
 			hsla = jQuery.map( this.hsla(), function( v, i ) {
-				if ( v == null ) {
+				if ( v === null ) {
 					v = i > 2 ? 1 : 0;
 				}
 
@@ -6898,7 +6898,7 @@ function hue2rgb( p, q, h ) {
 }
 
 spaces.hsla.to = function ( rgba ) {
-	if ( rgba[ 0 ] == null || rgba[ 1 ] == null || rgba[ 2 ] == null ) {
+	if ( rgba[ 0 ] === null || rgba[ 1 ] === null || rgba[ 2 ] === null ) {
 		return [ null, null, null, rgba[ 3 ] ];
 	}
 	var r = rgba[ 0 ] / 255,
@@ -6931,11 +6931,11 @@ spaces.hsla.to = function ( rgba ) {
 	} else {
 		s = diff / ( 2 - add );
 	}
-	return [ Math.round(h) % 360, s, l, a == null ? 1 : a ];
+	return [ Math.round(h) % 360, s, l, a === null ? 1 : a ];
 };
 
 spaces.hsla.from = function ( hsla ) {
-	if ( hsla[ 0 ] == null || hsla[ 1 ] == null || hsla[ 2 ] == null ) {
+	if ( hsla[ 0 ] === null || hsla[ 1 ] === null || hsla[ 2 ] === null ) {
 		return [ null, null, null, hsla[ 3 ] ];
 	}
 	var h = hsla[ 0 ] / 360,
@@ -6978,7 +6978,7 @@ each( spaces, function( spaceName, space ) {
 
 		each( props, function( key, prop ) {
 			var val = arr[ type === "object" ? key : prop.idx ];
-			if ( val == null ) {
+			if ( val === null ) {
 				val = local[ prop.idx ];
 			}
 			local[ prop.idx ] = clamp( val, prop );
@@ -7014,7 +7014,7 @@ each( spaces, function( spaceName, space ) {
 				value = value.call( this, cur );
 				vtype = jQuery.type( value );
 			}
-			if ( value == null && prop.empty ) {
+			if ( value === null && prop.empty ) {
 				return this;
 			}
 			if ( vtype === "string" ) {
@@ -7200,7 +7200,7 @@ function styleDifference( oldStyle, newStyle ) {
 // support: jQuery <1.8
 if ( !$.fn.addBack ) {
 	$.fn.addBack = function( selector ) {
-		return this.add( selector == null ?
+		return this.add( selector === null ?
 			this.prevObject : this.prevObject.filter( selector )
 		);
 	};
@@ -7512,7 +7512,7 @@ function _normalizeArguments( effect, options, speed, callback ) {
 	effect = { effect: effect };
 
 	// catch (effect, null, ...)
-	if ( options == null ) {
+	if ( options === null ) {
 		options = {};
 	}
 

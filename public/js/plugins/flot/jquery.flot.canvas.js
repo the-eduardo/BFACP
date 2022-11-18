@@ -47,7 +47,7 @@ browser, but needs to redraw with canvas text when exporting as an image.
 		// we would just get our new function back.  This whole replacing of
 		// prototype functions is a disaster, and needs to be changed ASAP.
 
-		if (render == null) {
+		if (render === null) {
 			getTextInfo = Canvas.prototype.getTextInfo,
 			addText = Canvas.prototype.addText,
 			render = Canvas.prototype.render;
@@ -168,19 +168,19 @@ browser, but needs to redraw with canvas text when exporting as an image.
 
 			layerCache = this._textCache[layer];
 
-			if (layerCache == null) {
+			if (layerCache === null) {
 				layerCache = this._textCache[layer] = {};
 			}
 
 			styleCache = layerCache[textStyle];
 
-			if (styleCache == null) {
+			if (styleCache === null) {
 				styleCache = layerCache[textStyle] = {};
 			}
 
 			info = styleCache[text];
 
-			if (info == null) {
+			if (info === null) {
 
 				var context = this.context;
 

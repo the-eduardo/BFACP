@@ -36,7 +36,7 @@ API.txt for details.
 
 		var leftPad = function(n, pad) {
 			n = "" + n;
-			pad = "" + (pad == null ? "0" : pad);
+			pad = "" + (pad === null ? "0" : pad);
 			return n.length == 1 ? pad + n : n;
 		};
 
@@ -45,11 +45,11 @@ API.txt for details.
 		var hours = d.getHours();
 		var isAM = hours < 12;
 
-		if (monthNames == null) {
+		if (monthNames === null) {
 			monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 		}
 
-		if (dayNames == null) {
+		if (dayNames === null) {
 			dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 		}
 
@@ -213,7 +213,7 @@ API.txt for details.
 							(opts.minTickSize && opts.minTickSize[1] ===
 							"quarter") ? specQuarters : specMonths;
 
-						if (opts.minTickSize != null) {
+						if (opts.minTickSize !== null) {
 							if (typeof opts.tickSize == "number") {
 								minSize = opts.tickSize;
 							} else {
@@ -239,7 +239,7 @@ API.txt for details.
 							// if given a minTickSize in years, just use it,
 							// ensuring that it's an integer
 
-							if (opts.minTickSize != null && opts.minTickSize[1] == "year") {
+							if (opts.minTickSize !== null && opts.minTickSize[1] == "year") {
 								size = Math.floor(opts.minTickSize[0]);
 							} else {
 
@@ -359,7 +359,7 @@ API.txt for details.
 
 						// first check global format
 
-						if (opts.timeformat != null) {
+						if (opts.timeformat !== null) {
 							return formatDate(d, opts.timeformat, opts.monthNames, opts.dayNames);
 						}
 

@@ -254,7 +254,7 @@ angular.module('bfacp').controller('ScoreboardController', ['$scope', '$rootScop
             var mode = $scope.server.mode;
             var num = null;
 
-            if (tickets_needed == null || mode.uri == "RushLarge0" || mode.uri == "Heist0") {
+            if (tickets_needed === null || mode.uri == "RushLarge0" || mode.uri == "Heist0") {
                 $scope.winning[1] = false;
                 $scope.winning[2] = false;
                 $scope.winning[3] = false;

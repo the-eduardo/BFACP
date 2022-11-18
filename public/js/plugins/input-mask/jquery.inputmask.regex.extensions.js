@@ -146,7 +146,7 @@ Allows for using regular expressions as a mask
                         }
 
 
-                        if (opts.regexTokens == null) {
+                        if (opts.regexTokens === null) {
                             analyseRegex();
                         }
 

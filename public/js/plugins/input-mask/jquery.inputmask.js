@@ -274,7 +274,7 @@
                     }
 
                     //return is false or a json object => { pos: ??, c: ??} or true
-                    return activeMaskset['tests'][testPos].fn != null ?
+                    return activeMaskset['tests'][testPos].fn !== null ?
                         activeMaskset['tests'][testPos].fn.test(chrs, buffer, position, strict, opts)
                         : (c == getBufferElement(activeMaskset['_buffer'], position, true) || c == opts.skipOptionalPartCharacter) ?
                             { "refresh": true, c: getBufferElement(activeMaskset['_buffer'], position, true), pos: position }
@@ -1187,7 +1187,7 @@
                     getActiveMaskSet()['greedy'] = getActiveMaskSet()['greedy'] ? getActiveMaskSet()['greedy'] : getActiveMaskSet()['repeat'] == 0;
 
                     //handle maxlength attribute
-                    if ($el.attr("maxLength") != null) //only when the attribute is set
+                    if ($el.attr("maxLength") !== null) //only when the attribute is set
                     {
                         var maxLength = $el.prop('maxLength');
                         if (maxLength > -1) { //handle *-repeat
